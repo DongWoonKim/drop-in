@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login</title>
+  <!-- jQuery CDN -->
+  <script src="https://code.jquery.com/jquery-3.7.1.js" crossorigin="anonymous"></script>
+  <script th:src="@{/js/common.js}"></script>
+  <script th:src="@{/js/login.js}"></script>
+  <link th:href="@{/css/common.css}" rel="stylesheet">
+  <link th:href="@{/css/login.css}" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+  <h1 class="title">Login</h1>
+  <!-- 로그인 폼 -->
+  <div>
+    <!-- ID 입력 -->
+    <div class="form-group">
+      <label for="userId">ID</label>
+      <input type="text" id="userId" name="userId" placeholder="Enter your ID" required />
+    </div>
+    <!-- Password 입력 -->
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" placeholder="Enter your password" required />
+    </div>
+    <!-- 로그인 버튼: onclick 이벤트를 통해 login() 함수 호출 -->
+    <button type="submit" onclick="login()" class="btn-submit">Login</button>
+  </div>
+</div>
+
+</body>
+</html>
