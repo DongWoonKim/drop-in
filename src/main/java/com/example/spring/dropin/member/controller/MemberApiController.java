@@ -8,8 +8,10 @@ import com.example.spring.dropin.dto.LoginRequestDTO;
 import com.example.spring.dropin.dto.LoginResponseDTO;
 import com.example.spring.dropin.member.service.MemberService;
 import com.example.spring.dropin.util.CookieUtil;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -54,5 +56,11 @@ public class MemberApiController {
         return LoginResponseDTO.builder()
                 .accessToken(accessToken)
                 .build();
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<Void> logout(HttpServletRequest request, HttpServletResponse response) {
+        CookieUtil.deleteCookie(request, response, "refreshToken");
+        return ResponseEntity.ok().build();
     }
 }

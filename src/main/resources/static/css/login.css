@@ -39,6 +39,7 @@
 }
 /* 로그인 버튼 */
 .btn-submit {
+    margin-bottom: 10px;
     width: 100%;
     background-color: #6f49f3;
     color: #fff;

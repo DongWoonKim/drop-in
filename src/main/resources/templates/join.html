@@ -9,15 +9,16 @@
   <script th:src="@{/js/join.js}"></script>
   <link th:href="@{/css/common.css}" rel="stylesheet">
   <link th:href="@{/css/join.css}" rel="stylesheet">
-
 </head>
-
 <body>
 <div class="container">
+  <!-- 뒤로가기 버튼 -->
+  <a href="/members/login" class="btn-back">&lt;back</a>
+
   <h1 class="title">Sign Up</h1>
+
   <!-- 실제 프로젝트에서는 th:action, th:method 등으로 서버 연결 -->
   <div>
-
     <!-- ID -->
     <div class="form-group">
       <label for="userId">ID</label>
@@ -64,7 +65,6 @@
     <!-- Submit -->
     <button onclick="signUp()" class="btn-submit">Sign Up</button>
   </div>
-
 </div>
 </body>
 </html>
