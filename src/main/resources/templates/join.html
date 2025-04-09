@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign Up</title>
+  <!-- jQuery (비밀번호 표시/숨기기 스크립트 등 필요시 사용) -->
+  <script src="https://code.jquery.com/jquery-3.7.1.js" crossorigin="anonymous"></script>
+  <script th:src="@{/js/join.js}"></script>
+  <link th:href="@{/css/common.css}" rel="stylesheet">
+  <link th:href="@{/css/join.css}" rel="stylesheet">
+
+</head>
+
+<body>
+<div class="container">
+  <h1 class="title">Sign Up</h1>
+  <!-- 실제 프로젝트에서는 th:action, th:method 등으로 서버 연결 -->
+  <div>
+
+    <!-- ID -->
+    <div class="form-group">
+      <label for="userId">ID</label>
+      <input type="text" id="userId" name="userId" placeholder="Enter your ID" required />
+    </div>
+
+    <!-- Password -->
+    <div class="form-group password-container">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" placeholder="Enter your password" required />
+      <span class="toggle-password" onclick="togglePassword()">👁️</span>
+    </div>
+
+    <!-- Name -->
+    <div class="form-group">
+      <label for="userName">Name</label>
+      <input type="text" id="userName" name="userName" placeholder="Enter your name" required />
+    </div>
+
+    <!-- Birth -->
+    <div class="form-group">
+      <label for="birthDate">Birth Date</label>
+      <input type="date" id="birthDate" name="birthDate" required />
+    </div>
+
+    <!-- Phone -->
+    <div class="form-group">
+      <label for="phone">Contact</label>
+      <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required />
+    </div>
+
+    <!-- Email -->
+    <div class="form-group">
+      <label for="email">E-mail</label>
+      <input type="email" id="email" name="email" placeholder="Enter your email" required />
+    </div>
+
+    <!-- Box -->
+    <div class="form-group">
+      <label for="box">Box Info</label>
+      <input type="text" id="box" name="box" placeholder="Enter your gym/box info" required />
+    </div>
+
+    <!-- Submit -->
+    <button onclick="signUp()" class="btn-submit">Sign Up</button>
+  </div>
+
+</div>
+</body>
+</html>

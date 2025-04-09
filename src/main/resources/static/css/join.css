@@ -1,0 +1,82 @@
+/* 메인 컨테이너 */
+.container {
+    width: 90%;
+    max-width: 400px; /* 모바일~태블릿까지 대응, 데스크톱에서도 중앙에 적당한 크기로 */
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* 상단 제목 */
+.title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #6f49f3; /* 보라색 포인트 */
+    margin-bottom: 30px;
+}
+
+/* 라인 스타일의 폼 그룹 */
+.form-group {
+    margin-bottom: 20px;
+}
+.form-group label {
+    display: block;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+}
+.form-group input {
+    width: 100%;
+    font-size: 16px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    padding: 8px 0;
+    outline: none;
+}
+.form-group input:focus {
+    border-color: #6f49f3;
+}
+
+/* 비밀번호 표시/숨기기 아이콘 컨테이너 */
+.password-container {
+    position: relative; /* 아이콘 위치를 위해 컨테이너를 상대 위치로 지정 */
+}
+.toggle-password {
+    position: absolute;
+    right: 0;
+    bottom: 8px;
+    cursor: pointer;
+    color: #999;
+    font-size: 16px;
+    user-select: none; /* 드래그 방지 */
+}
+.toggle-password:hover {
+    color: #6f49f3;
+}
+
+/* 가입 버튼 */
+.btn-submit {
+    width: 100%;
+    background-color: #6f49f3;
+    color: #fff;
+    border: none;
+    border-radius: 24px;
+    padding: 12px;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.btn-submit:hover {
+    background-color: #5c3fd9; /* 호버 시 조금 어두워지는 효과 */
+}
+
+/* 반응형 추가 */
+@media (max-width: 480px) {
+    .title {
+        font-size: 20px;
+    }
+}

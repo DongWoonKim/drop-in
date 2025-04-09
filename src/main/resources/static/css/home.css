@@ -1,0 +1,65 @@
+/* 메인 컨테이너 */
+.container {
+    width: 90%;
+    max-width: 400px;
+    margin: 0 auto;
+    flex: 1;
+}
+/* 헤더 영역 */
+.header {
+    padding: 16px 0;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    color: #6f49f3; /* 포인트 색상 */
+}
+/* 메인 컨텐츠 */
+.content {
+    padding: 12px 0;
+    color: #333;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/********************************
+ * 하단 네비게이션 바 (Coupang 스타일 유사)
+ ********************************/
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 400px; /* 상단 .container와 맞춤 */
+    background-color: #fff;
+    border-top: 1px solid #e0e0e0;
+    box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 5px 0;
+    z-index: 999; /* 다른 요소들 위로 */
+}
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #666;
+    flex: 1;
+    font-size: 1.6rem;
+}
+.nav-icon {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 4px;
+    object-fit: contain; /* 아이콘이 늘어나지 않고 비율 유지 */
+}
+.nav-label {
+    font-size: 12px;
+}
+/* 활성화된 메뉴 스타일 */
+.nav-item.active {
+    color: #6f49f3;
+    font-weight: bold;
+}
