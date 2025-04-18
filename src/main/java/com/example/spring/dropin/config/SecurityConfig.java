@@ -51,7 +51,9 @@ public class SecurityConfig {
                                     new AntPathRequestMatcher("/", "GET"),
                                     new AntPathRequestMatcher("/members", "POST"),
                                     new AntPathRequestMatcher("/members/login", "POST"),
-                                    new AntPathRequestMatcher("/members/logout", "POST")
+                                    new AntPathRequestMatcher("/members/logout", "POST"),
+                                    new AntPathRequestMatcher("/records", "GET"),
+                                    new AntPathRequestMatcher("/records", "POST")
                                 )
                                 .permitAll()
                                 .anyRequest().authenticated())

@@ -14,6 +14,7 @@ let handleTokenExpiration = () => {
         error: (error) => {
             alert('로그인이 필요합니다. 다시 로그인해주세요.');
             localStorage.removeItem('accessToken');
+            window.location.href = '/members/login';
         }
     });
 }
@@ -36,4 +37,55 @@ let checkToken = () => {
         return false;
     }
     return true;
+}
+
+let userInfo = () => {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            type: 'GET',
+            url: '/members/me',
+            success: (response) => {
+                resolve(response); // 성공 시 Promise를 해결
+            },
+            error: (xhr) => {
+                if (xhr.status === 401) {
+                    handleTokenExpiration();
+                } else {
+                    reject(xhr); // 오류가 발생한 경우 Promise를 거부
+                }
+            }
+        });
+    });
+}
+
+let getToday = () => {
+    // 1) 오늘 날짜 계산 (yyyy‑mm‑dd)
+    const now   = new Date();
+    const yyyy  = now.getFullYear();
+    const mm    = String(now.getMonth() + 1).padStart(2, '0');
+    const dd    = String(now.getDate()).padStart(2, '0');
+
+    return `${yyyy}-${mm}-${dd}`;
+}
+
+let getWod = (date, box) => {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            type: 'GET',
+            url: '/wods',
+            data: {date, box},
+            dataType: 'json',
+            success: (response) => {
+                resolve(response); // 성공 시 Promise를 해결
+            },
+            error: (xhr) => {
+                if (xhr.status === 401) {
+                    handleTokenExpiration();
+                } else {
+                    reject(xhr); // 오류가 발생한 경우 Promise를 거부
+                }
+            }
+        })
+    });
+
 }
