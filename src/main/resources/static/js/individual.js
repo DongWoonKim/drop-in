@@ -25,7 +25,6 @@ let getRecord = () => {
         data: {date, box, userId},
         dataType: 'json',
         success: (response) => {
-            alert('기록이 저장되었습니다.');
             $('#hRecordId').val(response.id);
             $('#record-text').val(response.content);
         },
