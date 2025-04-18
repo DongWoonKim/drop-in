@@ -74,7 +74,7 @@ let datePicker = () => {
     // 3) 날짜 변경 시 이벤트 핸들러
     $('#individual-date-picker').on('change', function() {
         const date = $(this).val();  // yyyy‑mm‑dd 형식
-        console.log('날짜가 변경되었습니다:', date);
+        getRecord();
         reqWod(date, box);
     });
 }
