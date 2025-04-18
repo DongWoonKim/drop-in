@@ -1,6 +1,6 @@
 package com.example.spring.dropin.domain;
 
-import com.example.spring.dropin.member.dto.JoinResponseDTO;
+import com.example.spring.dropin.core.member.dto.JoinResponseDTO;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;

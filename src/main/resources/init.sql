@@ -25,3 +25,12 @@ CREATE TABLE wod (
                      created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                      PRIMARY KEY (id)
 );
+
+CREATE TABLE record (
+                        id       BIGINT       NOT NULL AUTO_INCREMENT,
+                        user_id  VARCHAR(30)  NOT NULL,
+                        content  TEXT          NOT NULL,
+                        date     DATE          NOT NULL,
+                        box      VARCHAR(100) NOT NULL,
+                        PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
