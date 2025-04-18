@@ -44,6 +44,10 @@ public class SecurityConfig {
                                 .requestMatchers(
                                     new AntPathRequestMatcher("/members/new", "GET"),
                                     new AntPathRequestMatcher("/members/login", "GET"),
+                                    new AntPathRequestMatcher("/home", "GET"),
+                                    new AntPathRequestMatcher("/individual", "GET"),
+                                    new AntPathRequestMatcher("/group", "GET"),
+                                    new AntPathRequestMatcher("/wods", "GET"),
                                     new AntPathRequestMatcher("/", "GET"),
                                     new AntPathRequestMatcher("/members", "POST"),
                                     new AntPathRequestMatcher("/members/login", "POST"),

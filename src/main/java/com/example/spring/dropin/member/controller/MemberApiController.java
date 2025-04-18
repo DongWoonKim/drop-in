@@ -2,10 +2,10 @@ package com.example.spring.dropin.member.controller;
 
 import com.example.spring.dropin.config.jwt.TokenProvider;
 import com.example.spring.dropin.domain.Member;
-import com.example.spring.dropin.dto.JoinRequestDTO;
-import com.example.spring.dropin.dto.JoinResponseDTO;
-import com.example.spring.dropin.dto.LoginRequestDTO;
-import com.example.spring.dropin.dto.LoginResponseDTO;
+import com.example.spring.dropin.member.dto.JoinRequestDTO;
+import com.example.spring.dropin.member.dto.JoinResponseDTO;
+import com.example.spring.dropin.member.dto.LoginRequestDTO;
+import com.example.spring.dropin.member.dto.LoginResponseDTO;
 import com.example.spring.dropin.member.service.MemberService;
 import com.example.spring.dropin.util.CookieUtil;
 import jakarta.servlet.http.HttpServletRequest;

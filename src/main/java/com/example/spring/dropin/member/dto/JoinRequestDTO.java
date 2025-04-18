@@ -1,4 +1,4 @@
-package com.example.spring.dropin.dto;
+package com.example.spring.dropin.member.dto;
 
 import com.example.spring.dropin.domain.Member;
 import lombok.Getter;
