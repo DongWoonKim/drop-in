@@ -25,6 +25,7 @@ let getRecord = () => {
         data: {date, box, userId},
         dataType: 'json',
         success: (response) => {
+            alert('기록이 저장되었습니다.');
             $('#hRecordId').val(response.id);
             $('#record-text').val(response.content);
         },
@@ -73,6 +74,7 @@ let datePicker = () => {
 
     // 3) 날짜 변경 시 이벤트 핸들러
     $('#individual-date-picker').on('change', function() {
+        $('#record-text').val('');
         const date = $(this).val();  // yyyy‑mm‑dd 형식
         getRecord();
         reqWod(date, box);
