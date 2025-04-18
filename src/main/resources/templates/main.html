@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Home</title>
+  <!-- CDN으로 DOMPurify 추가 -->
+  <script src="https://unpkg.com/dompurify@2.4.0/dist/purify.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.js" crossorigin="anonymous"></script>
+  <script th:src="@{/js/common.js}"></script>
+  <script th:src="@{/js/main.js}"></script>
+  <script th:src="@{/js/home.js}"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link th:href="@{/css/common.css}" rel="stylesheet">
+  <link th:href="@{/css/main.css}" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <!-- 헤더 -->
+    <div class="header">
+      <div th:text="${#strings.toUpperCase(page)}"></div>
+      <!-- 우측 상단에 로그아웃 버튼 추가 -->
+      <button onclick="logout()" class="logout-btn">로그아웃</button>
+    </div>
+    <!-- ① 콘텐츠 영역: page 변수에 따라 fragment include -->
+
+    <div id="content">
+      <!-- page 값이 "home" 일 때에만 home fragment -->
+      <div th:if="${page == 'home'}">
+        <div th:replace="~{fragments/home :: content}"></div>
+      </div>
+
+      <!-- page 값이 "profile" 일 때에만 profile fragment -->
+      <div th:if="${page == 'individual'}">
+        <div th:replace="~{fragments/individual :: content}"></div>
+      </div>
+
+      <!-- page 값이 "group" 일 때에만 group fragment -->
+      <div th:if="${page == 'group'}">
+        <div th:replace="~{fragments/group :: content}"></div>
+      </div>
+    </div>
+
+    <!-- ② 하단 네비 -->
+    <div class="bottom-nav">
+      <a th:href="@{/home}"
+         th:classappend="${page=='home'} ? ' active'"
+         class="nav-item">
+        <i class="fa-solid fa-house"></i>
+      </a>
+      <a th:href="@{/individual}"
+         th:classappend="${page=='individual'} ? ' active'"
+         class="nav-item">
+        <i class="fa-solid fa-user"></i>
+      </a>
+      <a th:href="@{/group}"
+         th:classappend="${page=='group'} ? ' active'"
+         class="nav-item">
+        <i class="fa-solid fa-users"></i>
+      </a>
+    </div>
+
+  </div>
+
+</body>
+</html>

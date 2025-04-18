@@ -16,3 +16,12 @@ CREATE TABLE member (
                         created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                         PRIMARY KEY (id)
 );
+
+CREATE TABLE wod (
+                     id BIGINT NOT NULL AUTO_INCREMENT,
+                     title VARCHAR(200) NOT NULL,
+                     program text NOT NULL,
+                     box VARCHAR(100) NOT NULL,
+                     created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                     PRIMARY KEY (id)
+);
