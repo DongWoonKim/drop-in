@@ -1,3 +1,5 @@
+let contented = false;
+
 $(document).ready(() => {
     setupAjax();
     userInfo().then((userInfo) => {
@@ -27,7 +29,16 @@ let getRecord = () => {
         dataType: 'json',
         success: (response) => {
             $('#hRecordId').val(response.id);
-            $('#record-text').val(response.content);
+            if (!response.content) {
+                console.log('기록이 없습니다.');
+                contented = false;
+                $('#record-text').val('');
+                $('#record-save-btn').text('저장하기');
+            } else {
+                contented = true;
+                $('#record-text').val(response.content);
+                $('#record-save-btn').text('수정하기');
+            }
         },
         error: (xhr) => {
             if (xhr.status === 401) {
@@ -39,6 +50,11 @@ let getRecord = () => {
 }
 
 let saveRecord = () => {
+    if (!contented) newSave();
+    else update();
+}
+
+let newSave = () => {
     const record = $('#record-text').val();
     const dateStr = $('#individual-date-picker').val();
     const userId =  $('#hUserId').val();
@@ -62,7 +78,10 @@ let saveRecord = () => {
         error: (xhr) => {
         }
     });
+}
 
+let update = () => {
+    alert('개발중입니다.')
 }
 
 let datePicker = (elementId) => {

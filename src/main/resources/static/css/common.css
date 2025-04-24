@@ -8,3 +8,21 @@
 body {
     background-color: #ffffff;
 }
+
+.date-picker {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 16px;
+    font-family: inherit;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    background-color: #fff;
+    margin-bottom: 16px;
+    appearance: none;
+}
+
+.date-picker::-webkit-calendar-picker-indicator {
+    filter: invert(0.5);
+    cursor: pointer;
+}

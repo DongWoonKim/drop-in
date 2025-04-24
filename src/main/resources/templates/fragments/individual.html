@@ -6,7 +6,7 @@
   <input type="hidden" id="hRecordId">
   <!-- HTML -->
   <p>
-    <input type="date" id="individual-date-picker">
+    <input type="date" id="individual-date-picker" class="date-picker">
   </p>
   <br>
   <h2 id="wod-title"></h2>
@@ -21,12 +21,12 @@
   <br>
 
   <!-- My Record 입력 폼 -->
-  <div id="record-form">
-    <!-- 실제 입력 필드 -->
-    <textarea name="record" id="record-text" rows="5" cols="50"
+  <div class="record-form">
+    <div class="record-form-card">
+    <textarea name="record" id="record-text" class="record-text" rows="5"
               placeholder="여기에 오늘 성과를 기록하세요"></textarea>
-    <br>
-    <button onclick="saveRecord()">저장하기</button>
+    </div>
+    <button onclick="saveRecord()" id="record-save-btn" class="record-save-btn">저장하기</button>
   </div>
 
 </div>
