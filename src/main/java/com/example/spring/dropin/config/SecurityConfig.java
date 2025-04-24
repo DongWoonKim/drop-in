@@ -28,7 +28,8 @@ public class SecurityConfig {
                 .requestMatchers(
                         "/static/**",
                         "/css/**",
-                        "/js/**"
+                        "/js/**",
+                        "/favicon.ico"
                 ); // 정적 리소스 경로 무시
     }
 
@@ -50,6 +51,7 @@ public class SecurityConfig {
                                     new AntPathRequestMatcher("/wods", "GET"),
                                     new AntPathRequestMatcher("/", "GET"),
                                     new AntPathRequestMatcher("/records", "GET"),
+                                    new AntPathRequestMatcher("/records/me", "GET"),
                                     new AntPathRequestMatcher("/members", "POST"),
                                     new AntPathRequestMatcher("/members/login", "POST"),
                                     new AntPathRequestMatcher("/members/logout", "POST"),

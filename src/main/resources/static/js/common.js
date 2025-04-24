@@ -8,6 +8,7 @@ let handleTokenExpiration = () => {
             withCredentials: true // 쿠키를 포함한 요청을 보냄
         },
         success: (response) => {
+            console.log('res res :: ', response)
             // 새로운 Access Token을 로컬스토리지에 저장
             localStorage.setItem('accessToken', response.token);
         },
@@ -51,8 +52,9 @@ let userInfo = () => {
                 if (xhr.status === 401) {
                     handleTokenExpiration();
                 } else if(xhr.status === 403) {
-                    localStorage.removeItem('accessToken');
-                    window.location.href = '/members/login';
+                    console.log('common::user info 403')
+                    // localStorage.removeItem('accessToken');
+                    // window.location.href = '/members/login';
                 } else {
                     reject(xhr); // 오류가 발생한 경우 Promise를 거부
                 }

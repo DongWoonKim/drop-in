@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -20,6 +21,18 @@ public interface RecordRepository extends JpaRepository<Record, Long> {
     """)
     Optional<Record> findByUserIdAndDateAndBox(
             @Param("userId") String    userId,
+            @Param("date") LocalDate date,
+            @Param("box")    String    box
+    );
+
+    @Query("""
+      select r
+        from Record r
+       where function('DATE', r.date) = :date
+         and r.box    = :box
+       order by r.userId asc
+    """)
+    Optional<List<Record>> findByDateAndBox(
             @Param("date") LocalDate date,
             @Param("box")    String    box
     );

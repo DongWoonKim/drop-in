@@ -1,6 +1,7 @@
+let box = 'hound_garak';
+
 $(document).ready(() => {
     setupAjax();
-    let box = 'hound_garak';
     getWod(getToday(), box).then((wod) => {
         $('#home-wod-title').text(wod.title);
         const clean = DOMPurify.sanitize(wod.program, {

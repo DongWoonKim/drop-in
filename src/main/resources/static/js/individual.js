@@ -1,8 +1,5 @@
-let box = 'hound_garak';
-
 $(document).ready(() => {
     setupAjax();
-
     userInfo().then((userInfo) => {
         $('#hUserId').val(userInfo.userId);
         $('#hUserName').val(userInfo.userName);
@@ -11,7 +8,7 @@ $(document).ready(() => {
     }).catch((error) => {
         console.error('Error while fetching user info:', error);
     });
-    datePicker();
+    datePicker('#individual-date-picker');
     reqWod(getToday(), box);
 });
 
@@ -25,7 +22,7 @@ let getRecord = () => {
 
     $.ajax({
         type: 'GET',
-        url: '/records',
+        url: '/records/me',
         data: {date, box, userId},
         dataType: 'json',
         success: (response) => {
@@ -68,15 +65,15 @@ let saveRecord = () => {
 
 }
 
-let datePicker = () => {
+let datePicker = (elementId) => {
     // 1) 오늘 날짜 계산 (yyyy‑mm‑dd)
     const today = getToday();
 
     // 2) input 기본값으로 오늘 날짜 세팅
-    $('#individual-date-picker').val(today);
+    $(elementId).val(today);
 
     // 3) 날짜 변경 시 이벤트 핸들러
-    $('#individual-date-picker').on('change', function() {
+    $(elementId).on('change', function() {
         $('#record-text').val('');
         const date = $(this).val();  // yyyy‑mm‑dd 형식
         getRecord();

@@ -22,7 +22,9 @@ public class TokenService {
     public ResponseEntity<?> handleRefreshToken(HttpServletRequest request, HttpServletResponse response) {
         String refreshToken = CookieUtil.getRefreshTokenFromCookies(request);
 
-        if (refreshToken != null && tokenProvider.validToken(refreshToken) == 1) {
+        int valided = tokenProvider.validToken(refreshToken);
+
+        if (refreshToken != null && valided == 1) {
             Member member = tokenProvider.getTokenDetails(refreshToken);
 
             String newAccessToken = tokenProvider.generateToken(member, Duration.ofHours(2));
@@ -31,7 +33,7 @@ public class TokenService {
             CookieUtil.addCookie(response, "refreshToken", newRefreshToken, 7 * 24 * 60 * 60);
             response.setHeader("Authorization", "Bearer " + newAccessToken);
 
-            return ResponseEntity.ok(RefreshTokenResponseDTO.builder().accessToken(newAccessToken).build());
+            return ResponseEntity.ok(RefreshTokenResponseDTO.builder().token(newAccessToken).build());
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Refresh Token이 유효하지 않습니다.");
         }

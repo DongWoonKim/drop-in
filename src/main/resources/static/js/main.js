@@ -1,4 +1,3 @@
-
 $(document).ready(() => {
     if ( !checkToken() )
         window.location.href = '/members/login';

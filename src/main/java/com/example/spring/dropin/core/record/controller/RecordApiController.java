@@ -1,12 +1,12 @@
 package com.example.spring.dropin.core.record.controller;
 
-import com.example.spring.dropin.core.record.dto.RecordFindReqeustDTO;
-import com.example.spring.dropin.core.record.dto.RecordFindResponseDTO;
-import com.example.spring.dropin.core.record.dto.RecordSaveRequestDTO;
-import com.example.spring.dropin.core.record.dto.RecordSaveResponseDTO;
+import com.example.spring.dropin.core.record.dto.*;
 import com.example.spring.dropin.core.record.service.RecordService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Collections;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -15,10 +15,16 @@ public class RecordApiController {
 
     private final RecordService recordService;
 
-    @GetMapping
+    @GetMapping("/me")
     public RecordFindResponseDTO getRecord(@ModelAttribute RecordFindReqeustDTO recordFindReqeustDTO) {
         return recordService.getRecord(recordFindReqeustDTO)
                 .orElse(RecordFindResponseDTO.EMPTY);
+    }
+
+    @GetMapping
+    public List<RecordAllResponseDTO> getAllRecord(@ModelAttribute RecordAllRequestDTO recordAllRequestDTO) {
+        return recordService.getRecordAll(recordAllRequestDTO)
+                .orElse(Collections.emptyList());
     }
 
     @PostMapping

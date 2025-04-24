@@ -26,8 +26,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
     private final static String TOKEN_PREFIX = "Bearer ";
     // 토큰 인증에서 제외할 URI 목록
     private static final List<String> EXCLUDED_URIS = List.of(
-            "/members/new", "/members/login", "/home", "/individual", "/refresh-token",
-            "/group", "/wods", "/", "/members", "/members/logout", "/records"
+        "/members/new", "/members/login", "/members/logout", "/refresh-token"
     );
 
     @Override
@@ -36,15 +35,17 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
         String requestURI = request.getRequestURI();
         log.info("request: {}", requestURI);
 
-        String token = resolveToken(request);
-        int tokenStatus = tokenProvider.validToken(token);
-        log.info("{}, token: {}",tokenStatus, token);
-
         // 예외 경로인 경우 토큰 검사 생략
         if (isExcluded(requestURI) && request.getMethod().matches("GET|POST")) {
             chain.doFilter(request, response);
             return;
         }
+
+        String token = resolveToken(request);
+        int tokenStatus = tokenProvider.validToken(token);
+        log.info("{}, token: {}",tokenStatus, token);
+
+
 
         if (token != null && tokenStatus == 1) {
             // 토큰이 유효할 경우, 인증 정보를 설정
