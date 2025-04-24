@@ -40,7 +40,6 @@ let getRecordAll = (date) => {
         data: {date, box},
         dataType: 'json',
         success: (response) => {
-            console.log('getRecordAll :: ', response)
             const container = $('#group-record');
             container.empty(); // 기존 내용 비우기
 
