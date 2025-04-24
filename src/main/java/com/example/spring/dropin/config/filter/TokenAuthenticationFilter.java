@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.List;
 
 @Slf4j
 @Component
@@ -23,16 +24,29 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
     private final TokenProvider tokenProvider;
     private final static String HEADER_AUTHORIZATION = "Authorization";
     private final static String TOKEN_PREFIX = "Bearer ";
+    // 토큰 인증에서 제외할 URI 목록
+    private static final List<String> EXCLUDED_URIS = List.of(
+            "/members/new", "/members/login", "/home", "/individual", "/refresh-token",
+            "/group", "/wods", "/", "/members", "/members/logout", "/records"
+    );
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
 
-        log.info("request: {}", request.getRequestURI());
+        String requestURI = request.getRequestURI();
+        log.info("request: {}", requestURI);
 
         String token = resolveToken(request);
-        log.info("{}, token: {}",tokenProvider.validToken(token), token);
+        int tokenStatus = tokenProvider.validToken(token);
+        log.info("{}, token: {}",tokenStatus, token);
 
-        if (token != null && tokenProvider.validToken(token) == 1) {
+        // 예외 경로인 경우 토큰 검사 생략
+        if (isExcluded(requestURI) && request.getMethod().matches("GET|POST")) {
+            chain.doFilter(request, response);
+            return;
+        }
+
+        if (token != null && tokenStatus == 1) {
             // 토큰이 유효할 경우, 인증 정보를 설정
             Authentication authentication = tokenProvider.getAuthentication(token);
             SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -41,12 +55,20 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
             request.setAttribute("member", member);
 
         } else if (token != null && tokenProvider.validToken(token) == 2) {
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            return; // 더 이상 진행하지 않음
+            if (tokenStatus == 2) {
+                // 만료된 토큰: 클라이언트가 refresh-token 요청하도록
+                log.warn("Expired token, refresh needed.");
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); // 401
+            } else if (tokenStatus == 3) {
+                // 잘못된 토큰: 아예 접근 거부
+                log.warn("Invalid token, possible tampering.");
+                response.setStatus(HttpServletResponse.SC_FORBIDDEN); // 403
+            }
+
+            return;
         }
 
         chain.doFilter(request, response);
-
     }
 
     private String resolveToken(HttpServletRequest request) {
@@ -57,5 +79,9 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
             return bearerToken.substring(7);
         }
         return null;
+    }
+
+    private boolean isExcluded(String requestURI) {
+        return EXCLUDED_URIS.stream().anyMatch(requestURI::equals);
     }
 }

@@ -50,6 +50,9 @@ let userInfo = () => {
             error: (xhr) => {
                 if (xhr.status === 401) {
                     handleTokenExpiration();
+                } else if(xhr.status === 403) {
+                    localStorage.removeItem('accessToken');
+                    window.location.href = '/members/login';
                 } else {
                     reject(xhr); // 오류가 발생한 경우 Promise를 거부
                 }

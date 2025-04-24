@@ -49,11 +49,12 @@ public class SecurityConfig {
                                     new AntPathRequestMatcher("/group", "GET"),
                                     new AntPathRequestMatcher("/wods", "GET"),
                                     new AntPathRequestMatcher("/", "GET"),
+                                    new AntPathRequestMatcher("/records", "GET"),
                                     new AntPathRequestMatcher("/members", "POST"),
                                     new AntPathRequestMatcher("/members/login", "POST"),
                                     new AntPathRequestMatcher("/members/logout", "POST"),
-                                    new AntPathRequestMatcher("/records", "GET"),
-                                    new AntPathRequestMatcher("/records", "POST")
+                                    new AntPathRequestMatcher("/records", "POST"),
+                                    new AntPathRequestMatcher("/refresh-token", "POST")
                                 )
                                 .permitAll()
                                 .anyRequest().authenticated())

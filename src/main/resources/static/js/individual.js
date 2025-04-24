@@ -16,8 +16,12 @@ $(document).ready(() => {
 });
 
 let getRecord = () => {
-    const date = $('#individual-date-picker').val();
+    let date = $('#individual-date-picker').val();
     const userId = $('#hUserId').val();
+
+    if (!date) {
+        date = getToday();
+    }
 
     $.ajax({
         type: 'GET',
@@ -34,7 +38,7 @@ let getRecord = () => {
             } else {
             }
         }
-    })
+    });
 }
 
 let saveRecord = () => {
