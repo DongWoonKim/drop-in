@@ -11,26 +11,28 @@ async function h_initialize() {
     if (homePage === 'home') {
         setupAjax();
         await handleTokenExpiration();
-        const wod = await getWod(getToday(), box).then((wod) => {
-            $('#home-wod-title').text(wod.title);
-            const clean = DOMPurify.sanitize(wod.program, {
-                // 기본 설정만으로도 스크립트, 이벤트 핸들러(onclick 등) 제거
-                IN_PLACE : true
-            });
-            $('#home-wod-program').html(clean);
-        }).catch((xhr) => {
-            if (xhr.status === 401) {
-                // Refresh Token을 통해 Access Token 재발급 요청
-            } else if (xhr.status === 403) {
-                // window.location.href = '/access-denied';
-            } else {
-                // 다른 오류 처리
-                console.error('요청 오류 발생:', xhr);
-            }
+        const wod = await getWodWithRetry(getToday(), box);
+        $('#home-wod-title').text(wod.title);
+        const clean = DOMPurify.sanitize(wod.program, {
+            // 기본 설정만으로도 스크립트, 이벤트 핸들러(onclick 등) 제거
+            IN_PLACE : true
         });
+        $('#home-wod-program').html(clean);
+
     }
 }
 
-
-
+async function getWodWithRetry(date, box) {
+    try {
+        return await getWod(date, box);
+    } catch (xhr) {
+        if (xhr.status === 401) {
+            console.warn('🔁 Access Token 만료 → 재발급 시도 중...');
+            await handleTokenExpiration(); // 재발급 먼저
+            return await getWod(date, box); // 재요청
+        } else {
+            throw xhr;
+        }
+    }
+}
 
