@@ -39,10 +39,10 @@ public class MemberApiController {
         Member member = memberService.loginMember(loginRequestDTO.toMember());
 
         // Access Token 생성 (짧은 유효기간)
-        String accessToken = tokenProvider.generateToken(member, Duration.ofMinutes(1));
+        String accessToken = tokenProvider.generateToken(member, Duration.ofDays(1));
 
         // Refresh Token 생성 (긴 유효기간)
-        String refreshToken = tokenProvider.generateToken(member, Duration.ofDays(3));
+        String refreshToken = tokenProvider.generateToken(member, Duration.ofDays(10));
 
         // Refresh Token을 HttpOnly 쿠키에 저장
         CookieUtil.addCookie(response, "refreshToken", refreshToken, 7 * 24 * 60 * 60);

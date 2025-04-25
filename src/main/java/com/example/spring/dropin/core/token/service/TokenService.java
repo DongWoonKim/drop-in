@@ -31,8 +31,8 @@ public class TokenService {
         if (refreshToken != null && valided == 1) {
             Member member = tokenProvider.getTokenDetails(refreshToken);
 
-            String newAccessToken = tokenProvider.generateToken(member, Duration.ofMinutes(1));
-            String newRefreshToken = tokenProvider.generateToken(member, Duration.ofDays(3));
+            String newAccessToken = tokenProvider.generateToken(member, Duration.ofDays(1));
+            String newRefreshToken = tokenProvider.generateToken(member, Duration.ofDays(10));
 
             CookieUtil.addCookie(response, "refreshToken", newRefreshToken, 7 * 24 * 60 * 60);
             response.setHeader("Authorization", "Bearer " + newAccessToken);

@@ -49,6 +49,7 @@ let getRecord = () => {
         data: { date, box, userId },
         dataType: 'json',
         success: (response) => {
+            console.log('indi :: ', response);
             $('#hRecordId').val(response.id);
             if (!response.content) {
                 contented = false;
@@ -101,6 +102,8 @@ let newSave = () => {
         date: dateStr,
         box: box
     };
+
+    console.log('formData :: ', formData);
 
     $.ajax({
         type: 'POST',

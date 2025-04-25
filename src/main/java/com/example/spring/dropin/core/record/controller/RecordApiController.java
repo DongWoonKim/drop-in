@@ -29,6 +29,7 @@ public class RecordApiController {
 
     @PostMapping
     public RecordSaveResponseDTO save(@RequestBody RecordSaveRequestDTO recordSaveRequestDTO) {
+        System.out.println("recordSaveRequestDTO :: " + recordSaveRequestDTO);
         return recordService.recordSave(recordSaveRequestDTO);
     }
 
