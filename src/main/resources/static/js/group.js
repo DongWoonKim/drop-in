@@ -4,7 +4,6 @@ $(document).ready(() => {
 
 async function g_initialize() {
     const groupPage = $('body').data('page');
-    console.log('currentPage :: ', groupPage);
 
     if (groupPage === 'group') {
         setupAjax();
@@ -47,7 +46,6 @@ async function getRecordAllWithRetry(date) {
 }
 
 function getRecordAll(date) {
-    console.log('group :: ', date);
     if (!date) {
         date = getToday();
     }

@@ -2,9 +2,22 @@ $(document).ready(() => {
     if ( !checkToken() )
         window.location.href = '/members/login';
     setupAjax();
-    handleTokenExpiration();
     bottomNav();
 });
+
+let userStatus = () => {
+    let userId = 'test';
+    $.ajax({
+        type: 'GET',
+        url: '/members/'+ userId +'/pending',
+        success: (response) => {
+            resolve(response); // 성공 시 Promise를 해결
+        },
+        error: (xhr) => {
+            reject(xhr); // 오류가 발생한 경우 Promise를 거부
+        }
+    });
+}
 
 let bottomNav = () => {
     $('.bottom-nav').on('click', '.nav-item', function (e) {

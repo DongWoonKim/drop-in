@@ -6,7 +6,6 @@ $(document).ready(() => {
 
 async function i_initialize() {
     const individualPage = $('body').data('page');
-    console.log('currentPage :: ', individualPage);
 
     if (individualPage === 'individual') {
         setupAjax();
@@ -49,14 +48,13 @@ let getRecord = () => {
         data: { date, box, userId },
         dataType: 'json',
         success: (response) => {
-            console.log('indi :: ', response);
-            $('#hRecordId').val(response.id);
             if (!response.content) {
                 contented = false;
                 $('#record-text').val('');
                 $('#record-save-btn').text('저장하기');
             } else {
                 contented = true;
+                $('#hRecordId').val(response.id);
                 $('#record-text').val(response.content);
                 $('#record-save-btn').text('수정하기');
             }
@@ -103,16 +101,16 @@ let newSave = () => {
         box: box
     };
 
-    console.log('formData :: ', formData);
-
     $.ajax({
         type: 'POST',
-        url: '/records',
+        url: '/records/me',
         data: JSON.stringify(formData),
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         success: (response) => {
-            console.log('records 저장 완료:', response);
+            alert('기록이 저장되었습니다.')
+            if (response)
+                $('#hRecordId').val(response.recordId);
         },
         error: (xhr) => {
             console.error('저장 실패:', xhr);
@@ -121,7 +119,31 @@ let newSave = () => {
 }
 
 let update = () => {
-    alert('개발중입니다.');
+    const record = $('#record-text').val();
+    const userId = $('#hUserId').val();
+    const recordId = $('#hRecordId').val();
+
+    const formData = {
+        userId: userId,
+        content: record,
+        recordId: recordId
+    };
+
+    $.ajax({
+        type: 'PUT',
+        url: '/records/me',
+        data: JSON.stringify(formData),
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: (response) => {
+            if (response && response.success) {
+                alert('기록이 수정되었습니다.')
+            }
+        },
+        error: (xhr) => {
+            console.error('수정 실패:', xhr);
+        }
+    });
 }
 
 let datePicker = (elementId) => {
@@ -130,7 +152,9 @@ let datePicker = (elementId) => {
     $(elementId).on('change', function () {
         $('#record-text').val('');
         const date = $(this).val();
-        getRecordWithRetry();
-        reqWodWithRetry(date, box);
+        (async () => {
+            await getRecordWithRetry();
+            await reqWodWithRetry(date, box);
+        })();
     });
 }

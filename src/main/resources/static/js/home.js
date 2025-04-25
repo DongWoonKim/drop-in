@@ -7,7 +7,7 @@ $(document).ready(() => {
 
 async function h_initialize() {
     const homePage = $('body').data('page');
-    console.log('currentPage :: ', homePage);
+
     if (homePage === 'home') {
         setupAjax();
         await handleTokenExpiration();

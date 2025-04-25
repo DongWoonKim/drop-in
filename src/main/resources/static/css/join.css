@@ -74,6 +74,28 @@
     background-color: #5c3fd9; /* 호버 시 조금 어두워지는 효과 */
 }
 
+/* 셀렉트 박스도 input과 동일한 스타일 적용 */
+.styled-select {
+    width: 100%;
+    font-size: 16px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    padding: 8px 0;
+    outline: none;
+    background-color: transparent;
+    appearance: none; /* 기본 화살표 제거 (크롬/사파리) */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23666" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 0px center;
+    background-size: 16px;
+}
+
+.styled-select:focus {
+    border-color: #6f49f3;
+}
+
 /* 반응형 추가 */
 @media (max-width: 480px) {
     .title {

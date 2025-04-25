@@ -1,7 +1,9 @@
 package com.example.spring.dropin.core.record.repository;
 
 import com.example.spring.dropin.domain.Record;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -36,4 +38,13 @@ public interface RecordRepository extends JpaRepository<Record, Long> {
             @Param("date") LocalDate date,
             @Param("box")    String    box
     );
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE Record r SET r.content = :content WHERE r.id = :id AND r.userId = :userId")
+    int updateContentByIdAndUserId(@Param("id") Long id,
+                                   @Param("userId") String userId,
+                                   @Param("content") String content
+    );
+
 }

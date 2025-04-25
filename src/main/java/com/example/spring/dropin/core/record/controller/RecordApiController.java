@@ -27,10 +27,17 @@ public class RecordApiController {
                 .orElse(Collections.emptyList());
     }
 
-    @PostMapping
+    @PostMapping("/me")
     public RecordSaveResponseDTO save(@RequestBody RecordSaveRequestDTO recordSaveRequestDTO) {
-        System.out.println("recordSaveRequestDTO :: " + recordSaveRequestDTO);
         return recordService.recordSave(recordSaveRequestDTO);
     }
+
+    @PutMapping("/me")
+    public RecordUpdateResponseDTO update(@RequestBody RecordUpdateRequestDTO recordUpdateRequestDTO) {
+        return RecordUpdateResponseDTO.builder()
+                .success(recordService.recordUpdate(recordUpdateRequestDTO))
+                .build();
+    }
+
 
 }

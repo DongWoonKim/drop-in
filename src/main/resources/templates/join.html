@@ -23,44 +23,57 @@
     <!-- ID -->
     <div class="form-group">
       <label for="userId">ID</label>
-      <input type="text" id="userId" name="userId" placeholder="Enter your ID" required />
+      <input type="text" id="userId" name="userId" placeholder="ID를 입력해주세요." required />
     </div>
 
     <!-- Password -->
     <div class="form-group password-container">
       <label for="password">Password</label>
-      <input type="password" id="password" name="password" placeholder="Enter your password" required />
+      <input type="password" id="password" name="password" placeholder="비밀번호를 입력해주세요." required />
       <span class="toggle-password" onclick="togglePassword()">👁️</span>
     </div>
 
     <!-- Name -->
     <div class="form-group">
-      <label for="userName">Name</label>
-      <input type="text" id="userName" name="userName" placeholder="Enter your name" required />
+      <label for="userName">이름</label>
+      <input type="text" id="userName" name="userName" placeholder="실명을 입력해주세요." required />
     </div>
 
     <!-- Birth -->
     <div class="form-group">
-      <label for="birthDate">Birth Date</label>
-      <input type="date" id="birthDate" name="birthDate" required />
+      <label for="birthDate">생년월일</label>
+      <input type="text" id="birthDate" name="birthDate" placeholder="생년월일 6자리. 예)911009" required />
     </div>
 
     <!-- Phone -->
     <div class="form-group">
-      <label for="phone">Contact</label>
-      <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required />
+      <label for="phone">Phone</label>
+      <input type="tel" id="phone" name="phone" placeholder="'-'없이 입력해주세요. 예)01012345678" required />
     </div>
 
     <!-- Email -->
     <div class="form-group">
-      <label for="email">E-mail</label>
-      <input type="email" id="email" name="email" placeholder="Enter your email" required />
+      <label for="email-id">E-mail</label>
+      <div style="display: flex; gap: 10px;">
+        <input type="text" id="email-id" placeholder="이메일 아이디" required style="flex: 1;" />
+        <select id="email-domain" class="styled-select" style="flex: 1;">
+          <option value="">메일 선택</option>
+          <option value="@naver.com">@naver.com</option>
+          <option value="@gmail.com">@gmail.com</option>
+          <option value="@daum.net">@daum.net</option>
+          <option value="custom">직접입력</option>
+        </select>
+      </div>
+      <input type="text" id="email-custom-domain" placeholder="도메인 직접입력" style="margin-top: 10px; display: none;" />
     </div>
 
     <!-- Box -->
     <div class="form-group">
-      <label for="box">Box Info</label>
-      <input type="text" id="box" name="box" placeholder="Enter your gym/box info" required />
+      <label for="box">Box</label>
+      <select id="box" name="box" required class="styled-select">
+        <option value="">box를 선택하세요.</option>
+        <!-- 동적으로 추가될 예정 -->
+      </select>
     </div>
 
     <!-- Submit -->

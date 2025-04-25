@@ -29,8 +29,17 @@ CREATE TABLE wod (
 CREATE TABLE record (
                         id       BIGINT       NOT NULL AUTO_INCREMENT,
                         user_id  VARCHAR(30)  NOT NULL,
+                        user_name  VARCHAR(30)  NOT NULL,
                         content  TEXT          NOT NULL,
                         date     DATE          NOT NULL,
                         box      VARCHAR(100) NOT NULL,
+                        PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE box (
+                        id       BIGINT       NOT NULL AUTO_INCREMENT,
+                        box_name VARCHAR(100) NOT NULL,
+                        owner_id VARCHAR(30),
+                        created  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                         PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

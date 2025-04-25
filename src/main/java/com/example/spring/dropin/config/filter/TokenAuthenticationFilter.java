@@ -26,7 +26,11 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
     private final static String TOKEN_PREFIX = "Bearer ";
     // 토큰 인증에서 제외할 URI 목록
     private static final List<String> EXCLUDED_URIS = List.of(
-        "/members/new", "/members/login", "/members/logout", "/refresh-token"
+            "/members/new",
+            "/members/login",
+            "/members/logout",
+            "/refresh-token",
+            "/boxes"
     );
 
     @Override
@@ -45,8 +49,6 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
         int tokenStatus = tokenProvider.validToken(token);
         log.info("{}, token: {}",tokenStatus, token);
 
-
-
         if (token != null && tokenStatus == 1) {
             // 토큰이 유효할 경우, 인증 정보를 설정
             Authentication authentication = tokenProvider.getAuthentication(token);
@@ -55,7 +57,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
             Member member = tokenProvider.getTokenDetails(token);
             request.setAttribute("member", member);
 
-        } else if (token != null && tokenProvider.validToken(token) == 2) {
+        } else if (token != null) {
             if (tokenStatus == 2) {
                 // 만료된 토큰: 클라이언트가 refresh-token 요청하도록
                 log.warn("Expired token, refresh needed.");

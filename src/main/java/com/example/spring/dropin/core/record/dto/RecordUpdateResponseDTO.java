@@ -5,6 +5,6 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class RecordSaveResponseDTO {
-    private Long recordId;
+public class RecordUpdateResponseDTO {
+    private boolean success;
 }

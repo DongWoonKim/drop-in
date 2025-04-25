@@ -2,6 +2,7 @@ package com.example.spring.dropin.core.record.service;
 
 import com.example.spring.dropin.core.record.dto.*;
 import com.example.spring.dropin.core.record.repository.RecordRepository;
+import com.example.spring.dropin.domain.Record;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -20,9 +21,18 @@ public class RecordService {
     private final RecordRepository recordRepository;
 
     public RecordSaveResponseDTO recordSave(RecordSaveRequestDTO recordSaveRequestDTO) {
+        Record saved = recordRepository.save(recordSaveRequestDTO.toRecord());
         return RecordSaveResponseDTO.builder()
-                .content( recordRepository.save(recordSaveRequestDTO.toRecord()).getContent() )
+                .recordId(saved.getId())
                 .build();
+    }
+
+    public boolean recordUpdate(RecordUpdateRequestDTO recordUpdateRequestDTO) {
+        return recordRepository.updateContentByIdAndUserId(
+                recordUpdateRequestDTO.getRecordId(),
+                recordUpdateRequestDTO.getUserId(),
+                recordUpdateRequestDTO.getContent()
+        ) > 0;
     }
 
     public Optional<RecordFindResponseDTO> getRecord(RecordFindReqeustDTO recordFindReqeustDTO) {

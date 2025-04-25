@@ -11,7 +11,6 @@ let handleTokenExpiration = () => {
             success: (response) => {
                 localStorage.setItem('accessToken', response.token);
                 setupAjax(); // 새 토큰 적용
-                console.log('✅ 토큰 재발급 성공:', response.token);
                 resolve(); // ✅ resolve 호출
             },
             error: (error) => {
