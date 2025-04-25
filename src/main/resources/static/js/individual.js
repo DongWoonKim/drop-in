@@ -1,18 +1,27 @@
 let contented = false;
 
 $(document).ready(() => {
-    setupAjax();
-    userInfo().then((userInfo) => {
-        $('#hUserId').val(userInfo.userId);
-        $('#hUserName').val(userInfo.userName);
-
-        getRecord();
-    }).catch((error) => {
-        console.error('Error while fetching user info:', error);
-    });
-    datePicker('#individual-date-picker');
-    reqWod(getToday(), box);
+    i_initialize()
+        .catch(console.error);
 });
+
+async function i_initialize() {
+    const individualPage = $('body').data('page');
+    console.log('currentPage :: ', individualPage);
+    if (individualPage === 'individual') {
+        setupAjax();
+        await handleTokenExpiration();
+
+        await userInfo().then((userInfo) => {
+            $('#hUserId').val(userInfo.userId);
+            $('#hUserName').val(userInfo.userName);
+
+            getRecord();
+        });
+        datePicker('#individual-date-picker');
+        await reqWod(getToday(), box);
+    }
+}
 
 let getRecord = () => {
     let date = $('#individual-date-picker').val();
@@ -42,7 +51,6 @@ let getRecord = () => {
         },
         error: (xhr) => {
             if (xhr.status === 401) {
-                handleTokenExpiration();
             } else {
             }
         }
@@ -111,7 +119,6 @@ let reqWod = (date, box) => {
     }).catch((xhr) => {
         if (xhr.status === 401) {
             // Refresh Token을 통해 Access Token 재발급 요청
-            handleTokenExpiration();
         } else if (xhr.status === 403) {
             // window.location.href = '/access-denied';
         } else {

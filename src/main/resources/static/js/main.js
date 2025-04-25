@@ -1,8 +1,8 @@
 $(document).ready(() => {
     if ( !checkToken() )
         window.location.href = '/members/login';
-    // access token 유효성, status 상태 체크 로직 추가 필요
     setupAjax();
+    handleTokenExpiration();
     bottomNav();
 });
 

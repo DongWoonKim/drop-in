@@ -1,17 +1,25 @@
 $(document).ready(() => {
-    setupAjax();
-    gDatePicker('#group-date-picker');
-    userInfo().then((userInfo) => {
-        $('#hgUserId').val(userInfo.userId);
-        $('#hgUserName').val(userInfo.userName);
-
-        getRecordAll(getToday());
-    }).catch((error) => {
-        console.error('Error while fetching user info:', error);
-    });
-
-
+    g_initialize()
+        .catch(console.error);
 });
+
+async function g_initialize() {
+    const groupPage = $('body').data('page');
+    console.log('currentPage :: ', groupPage);
+    if (groupPage === 'group') {
+        setupAjax();
+        await handleTokenExpiration();
+        gDatePicker('#group-date-picker');
+        await userInfo().then((userInfo) => {
+            $('#hgUserId').val(userInfo.userId);
+            $('#hgUserName').val(userInfo.userName);
+
+            getRecordAll(getToday());
+        }).catch((error) => {
+            console.error('Error while fetching user info:', error);
+        });
+    }
+}
 
 let gDatePicker = (elementId) => {
     // 1) 오늘 날짜 계산 (yyyy‑mm‑dd)
@@ -54,10 +62,6 @@ let getRecordAll = (date) => {
             });
         },
         error: (xhr) => {
-            if (xhr.status === 401) {
-                handleTokenExpiration();
-            } else {
-            }
         }
     });
 }

@@ -19,7 +19,7 @@
   <link th:href="@{/css/individual.css}" rel="stylesheet">
   <link th:href="@{/css/group.css}" rel="stylesheet">
 </head>
-<body>
+<body th:attr="data-page=${page}">
   <div class="container">
     <!-- 헤더 -->
     <div class="header">

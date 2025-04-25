@@ -39,7 +39,7 @@ public class MemberApiController {
         Member member = memberService.loginMember(loginRequestDTO.toMember());
 
         // Access Token 생성 (짧은 유효기간)
-        String accessToken = tokenProvider.generateToken(member, Duration.ofHours(2));
+        String accessToken = tokenProvider.generateToken(member, Duration.ofMinutes(1));
 
         // Refresh Token 생성 (긴 유효기간)
         String refreshToken = tokenProvider.generateToken(member, Duration.ofDays(3));
