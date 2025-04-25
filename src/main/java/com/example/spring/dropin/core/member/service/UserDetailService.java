@@ -21,7 +21,6 @@ public class UserDetailService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         Member member = memberRepository.findByUserId(username);
-        System.out.println("UserDetailService :: " + member);
         if (member == null) {
             throw new UsernameNotFoundException(username + " not found");
         }
