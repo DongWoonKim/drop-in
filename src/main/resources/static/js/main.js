@@ -3,18 +3,26 @@ $(document).ready(() => {
         window.location.href = '/members/login';
     setupAjax();
     bottomNav();
+    m_initialize().catch(console.error)
 });
 
-let userStatus = () => {
-    let userId = 'test';
+async function m_initialize() {
+    await userInfo().then((userInfo) => {
+        userStatus(userInfo.userId)
+    });
+}
+
+let userStatus = (userId) => {
     $.ajax({
         type: 'GET',
-        url: '/members/'+ userId +'/pending',
+        url: '/members/'+ userId +'/status',
         success: (response) => {
-            resolve(response); // 성공 시 Promise를 해결
+            console.log('res res :: ', response)
+            if (response && response.status === 'PENDING') {
+                window.location.href = '/members/' + userId + '/pending';
+            }
         },
         error: (xhr) => {
-            reject(xhr); // 오류가 발생한 경우 Promise를 거부
         }
     });
 }

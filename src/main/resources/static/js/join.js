@@ -18,7 +18,6 @@ let boxes = () => {
         type: 'GET',
         url: '/boxes',
         success: (response) => {
-            console.log('response :: ', response);
             response.forEach(box => {
                 $('#box').append(
                     $('<option>', {
@@ -39,7 +38,7 @@ let signUp = () => {
     const userId = $('#userId').val().trim();
     const password = $('#password').val().trim();
     const userName = $('#userName').val().trim();
-    const birthDate = $('#birthDate').val().trim();
+    let birthDate = $('#birthDate').val().trim();
     const phone = $('#phone').val().trim();
     const emailId = $('#email-id').val().trim();
     const emailDomain = $('#email-domain').val();
@@ -81,7 +80,8 @@ let signUp = () => {
         return;
     }
 
-    // ✅ 검증 통과 → 콘솔 또는 서버로 전송
+    birthDate = convertBirthDate(birthDate);
+    // 검증 통과 → 콘솔 또는 서버로 전송
     const formData = {
         userId,
         password,
@@ -105,6 +105,20 @@ let signUp = () => {
         error: (xhr) => {
         }
     });
+}
+
+let convertBirthDate = (input) => {
+    if (!input || input.length !== 6) {
+        throw new Error('Invalid input format. Expected 6 digits.');
+    }
+
+    const yearPart = parseInt(input.substring(0, 2), 10);
+    const month = input.substring(2, 4);
+    const day = input.substring(4, 6);
+
+    const year = yearPart <= 29 ? `20${yearPart}` : `19${yearPart}`;
+
+    return `${year}-${month}-${day}`;
 }
 
 // 비밀번호 표시/숨기기

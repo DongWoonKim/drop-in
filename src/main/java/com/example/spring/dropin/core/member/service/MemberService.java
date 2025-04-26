@@ -1,6 +1,7 @@
 package com.example.spring.dropin.core.member.service;
 
 import com.example.spring.dropin.config.security.CustomUserDetails;
+import com.example.spring.dropin.core.member.dto.UserStatusResponseDTO;
 import com.example.spring.dropin.domain.Member;
 import com.example.spring.dropin.core.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +34,10 @@ public class MemberService {
         SecurityContextHolder.getContext().setAuthentication(authenticate);
 
         return ((CustomUserDetails) authenticate.getPrincipal()).getMember();
+    }
+
+    public Member getUserStatus(String userId) {
+        return memberRepository.findByUserId(userId);
     }
 
 }

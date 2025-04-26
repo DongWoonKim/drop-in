@@ -94,6 +94,13 @@ let newSave = () => {
     const dateStr = $('#individual-date-picker').val();
     const userId = $('#hUserId').val();
 
+    // 🛡️ 입력 방어: 위험한 태그 감지
+    const pattern = /<\s*(script|iframe|img|object|embed|link|style|base|form|input)[^>]*>/i;
+    if (pattern.test(record)) {
+        alert('스크립트나 위험한 태그는 입력할 수 없습니다.');
+        return;
+    }
+
     const formData = {
         userId: userId,
         content: record,

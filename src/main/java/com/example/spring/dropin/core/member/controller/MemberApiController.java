@@ -68,4 +68,11 @@ public class MemberApiController {
                 .userName(tokenDetails.getUserName())
                 .build();
     }
+
+    @GetMapping("/{userId}/status")
+    public UserStatusResponseDTO getMemberStatus(@PathVariable("userId") String userId) {
+        return UserStatusResponseDTO.builder()
+                .status( memberService.getUserStatus(userId).getStatus() )
+                .build();
+    }
 }

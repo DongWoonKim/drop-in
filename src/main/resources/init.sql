@@ -10,12 +10,12 @@ CREATE TABLE member (
                         role VARCHAR(20) NOT NULL DEFAULT 'ROLE_USER',
                         status VARCHAR(20) NOT NULL DEFAULT 'PENDING',
                         phone VARCHAR(15) NOT NULL,
-                        box VARCHAR(100) NOT NULL,
+                        box INTEGER NOT NULL,
                         birth DATE NOT NULL,
                         email VARCHAR(50) NOT NULL,
                         created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                         PRIMARY KEY (id)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE wod (
                      id BIGINT NOT NULL AUTO_INCREMENT,
@@ -24,7 +24,7 @@ CREATE TABLE wod (
                      box VARCHAR(100) NOT NULL,
                      created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                      PRIMARY KEY (id)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE record (
                         id       BIGINT       NOT NULL AUTO_INCREMENT,

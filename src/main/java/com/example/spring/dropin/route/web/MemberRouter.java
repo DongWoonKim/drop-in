@@ -22,9 +22,7 @@ public class MemberRouter {
 
     @GetMapping("/{userId}/pending")
     public String status(@PathVariable String userId, Model model) {
-        model.addAttribute("page", "status");
         model.addAttribute("userId", userId);
-
         return "pending";
     }
 }

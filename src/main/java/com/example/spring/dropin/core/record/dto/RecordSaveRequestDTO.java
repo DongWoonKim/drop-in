@@ -2,6 +2,7 @@ package com.example.spring.dropin.core.record.dto;
 
 import com.example.spring.dropin.domain.Record;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDate;
@@ -11,6 +12,7 @@ import java.time.LocalDate;
 public class RecordSaveRequestDTO {
     private String userId;
     private String date;
+    @Setter
     private String content;
     private String box;
 
