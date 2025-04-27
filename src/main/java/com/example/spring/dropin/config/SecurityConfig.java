@@ -54,6 +54,7 @@ public class SecurityConfig {
                                     new AntPathRequestMatcher("/records", "GET"),
                                     new AntPathRequestMatcher("/records/me", "GET"),
                                     new AntPathRequestMatcher("/boxes", "GET"),
+                                    new AntPathRequestMatcher("/actuator/health", "GET"),
                                     new AntPathRequestMatcher("/members", "POST"),
                                     new AntPathRequestMatcher("/members/login", "POST"),
                                     new AntPathRequestMatcher("/members/logout", "POST"),

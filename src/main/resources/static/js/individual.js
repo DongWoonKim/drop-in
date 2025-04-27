@@ -7,7 +7,6 @@ $(document).ready(() => {
 
 const checkContentAndToggleButton = () => {
     const content = $('#record-text').val().trim();
-    console.log("wodExists :: ", wodExists)
     if (content.length > 0 && wodExists) {
         $('#record-save-btn').prop('disabled', false);
     } else {
