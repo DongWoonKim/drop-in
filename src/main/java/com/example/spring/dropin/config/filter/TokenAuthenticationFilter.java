@@ -30,7 +30,8 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
             "/members/login",
             "/members/logout",
             "/refresh-token",
-            "/boxes"
+            "/boxes",
+            "/actuator/health"
     );
 
     @Override
