@@ -105,6 +105,7 @@
     color: #666;
     text-decoration: none;
     transition: color 0.3s ease;
+    width: fit-content;
 }
 
 .btn-back:hover {
