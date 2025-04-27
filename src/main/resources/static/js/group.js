@@ -59,15 +59,20 @@ function getRecordAll(date) {
             const container = $('#group-record');
             container.empty();
 
-            response.forEach(record => {
-                const card = `
-                    <div class="group-record-card">
-                        <div class="group-record-user">${record.userId}</div>
-                        <div class="group-record-content">${record.content}</div>
-                    </div>
-                `;
-                container.append(card);
-            });
+            if (response && response.length > 0) {
+                response.forEach(record => {
+                    const card = `
+                        <div class="group-record-card">
+                            <div class="group-record-user">${record.userId}</div>
+                            <div class="group-record-content">${record.content}</div>
+                        </div>
+                    `;
+                    container.append(card);
+                });
+            } else {
+                // 🛡️ 기록이 없을 때 기본 문구 표시
+                container.append('<p style="text-align:center; color:gray;">아직 등록된 기록이 없습니다.</p>');
+            }
         }
     });
 }

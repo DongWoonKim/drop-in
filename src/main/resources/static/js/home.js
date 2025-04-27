@@ -13,10 +13,13 @@ async function h_initialize() {
         await handleTokenExpiration();
         const wod = await getWodWithRetry(getToday(), box);
         $('#home-wod-title').text(wod.title);
-        const clean = DOMPurify.sanitize(wod.program, {
-            // 기본 설정만으로도 스크립트, 이벤트 핸들러(onclick 등) 제거
-            IN_PLACE : true
-        });
+
+        let clean = '';
+        if (wod.program && wod.program.trim().length > 0) {
+            clean = DOMPurify.sanitize(wod.program);
+        } else {
+            clean = '<p style="text-align:center; color:gray;">오늘의 WOD가 아직 등록되지 않았습니다.</p>';
+        }
         $('#home-wod-program').html(clean);
 
     }

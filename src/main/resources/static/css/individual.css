@@ -41,3 +41,25 @@
 .record-save-btn:hover {
     background-color: #45a049;
 }
+
+/* 🛡️ 비활성화(disabled) 상태 */
+.record-save-btn:disabled {
+    background-color: #cccccc; /* 회색 배경 */
+    color: #666666;            /* 연한 회색 글자 */
+    cursor: not-allowed;       /* 클릭 불가 커서 */
+}
+
+.toast {
+    position: fixed;
+    bottom: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(51, 51, 51, 0.9);
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    display: none;
+    z-index: 9999;
+    font-size: 16px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}

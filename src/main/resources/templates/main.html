@@ -27,7 +27,7 @@
     <div class="header">
       <div th:text="${#strings.toUpperCase(page)}"></div>
       <!-- 우측 상단에 로그아웃 버튼 추가 -->
-      <button onclick="logout()" class="logout-btn">로그아웃</button>
+      <button onclick="logout('로그아웃 되었습니다.')" class="logout-btn">로그아웃</button>
     </div>
     <!-- ① 콘텐츠 영역: page 변수에 따라 fragment include -->
     <div id="content">

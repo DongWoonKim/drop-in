@@ -1,8 +1,19 @@
 let contented = false;
+let wodExists = false;
 
 $(document).ready(() => {
     i_initialize().catch(console.error);
 });
+
+const checkContentAndToggleButton = () => {
+    const content = $('#record-text').val().trim();
+    console.log("wodExists :: ", wodExists)
+    if (content.length > 0 && wodExists) {
+        $('#record-save-btn').prop('disabled', false);
+    } else {
+        $('#record-save-btn').prop('disabled', true);
+    }
+};
 
 async function i_initialize() {
     const individualPage = $('body').data('page');
@@ -19,6 +30,14 @@ async function i_initialize() {
 
         datePicker('#individual-date-picker');
         await reqWodWithRetry(getToday(), box);
+
+        // 1. 페이지 로드될 때 처음 한번 체크
+        checkContentAndToggleButton();
+        // 2. 이후 input 발생할 때마다 체크
+        $('#record-text').on('input', checkContentAndToggleButton);
+
+        if (contented)
+            $('#record-save-btn').text('수정하기');
     }
 }
 
@@ -58,6 +77,8 @@ let getRecord = () => {
                 $('#record-text').val(response.content);
                 $('#record-save-btn').text('수정하기');
             }
+
+            checkContentAndToggleButton();
         }
     });
 }
@@ -79,7 +100,16 @@ async function reqWodWithRetry(date, box) {
 let reqWod = (date, box) => {
     return getWod(date, box).then((wod) => {
         $('#wod-title').text(wod.title);
-        const clean = DOMPurify.sanitize(wod.program, { IN_PLACE: true });
+
+        let clean = '';
+        if (wod.program && wod.program.trim().length > 0) {
+            wodExists = true;
+            clean = DOMPurify.sanitize(wod.program);
+        } else {
+            wodExists = false;
+            clean = '<p style="text-align:center; color:gray;">오늘의 WOD가 아직 등록되지 않았습니다.</p>';
+        }
+
         $('#wod-program').html(clean);
     });
 }
@@ -115,7 +145,7 @@ let newSave = () => {
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         success: (response) => {
-            alert('기록이 저장되었습니다.')
+            showToast('기록이 저장되었습니다.');
             if (response)
                 $('#hRecordId').val(response.recordId);
         },
@@ -144,7 +174,8 @@ let update = () => {
         dataType: 'json',
         success: (response) => {
             if (response && response.success) {
-                alert('기록이 수정되었습니다.')
+                // alert('기록이 수정되었습니다.')
+                showToast('기록이 수정되었습니다.');
             }
         },
         error: (xhr) => {
@@ -160,8 +191,17 @@ let datePicker = (elementId) => {
         $('#record-text').val('');
         const date = $(this).val();
         (async () => {
-            await getRecordWithRetry();
             await reqWodWithRetry(date, box);
+            await getRecordWithRetry();
         })();
     });
+}
+
+function showToast(message) {
+    const toast = $('#toast');
+    toast.text(message);
+    toast.fadeIn(300);
+    setTimeout(() => {
+        toast.fadeOut(300);
+    }, 2000);
 }

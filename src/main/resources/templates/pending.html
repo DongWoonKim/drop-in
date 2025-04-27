@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>가입 승인 대기중</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" crossorigin="anonymous"></script>
+    <script th:src="@{/js/common.js}"></script>
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
     <link rel="stylesheet" href="/css/common.css" />
     <style>
@@ -75,6 +77,9 @@
     <div class="pending-description">
         관리자 승인 후 서비스 이용이 가능합니다.<br/>
         가입 승인 결과는 이메일로 안내드립니다.
+    </div>
+    <div>
+        <button onclick="logout()" class="btn-back-login">로그인 화면으로</button>
     </div>
 <!--    <a href="/members/login">-->
 <!--        <button class="btn-back-login">로그인 화면으로</button>-->
