@@ -17,6 +17,10 @@ body {
     margin-bottom: 16px;
 }
 
+input[type="date"] {
+    color: #262626;
+}
+
 .date-picker {
     width: 100%;
     padding: 12px 14px;
