@@ -14,7 +14,7 @@
     text-align: center;
     font-size: 24px;
     font-weight: bold;
-    color: #6f49f3; /* 보라색 포인트 */
+    color: #262626;
     margin-bottom: 30px;
 }
 
@@ -37,7 +37,7 @@
     outline: none;
 }
 .form-group input:focus {
-    border-color: #6f49f3;
+    border-color: #262626;
 }
 
 /* 비밀번호 표시/숨기기 아이콘 컨테이너 */
@@ -54,13 +54,13 @@
     user-select: none; /* 드래그 방지 */
 }
 .toggle-password:hover {
-    color: #6f49f3;
+    color: #262626;
 }
 
 /* 가입 버튼 */
 .btn-submit {
     width: 100%;
-    background-color: #6f49f3;
+    background-color: #262626;
     color: #fff;
     border: none;
     border-radius: 24px;
@@ -71,7 +71,7 @@
     transition: background-color 0.3s ease;
 }
 .btn-submit:hover {
-    background-color: #5c3fd9; /* 호버 시 조금 어두워지는 효과 */
+    background-color: #0D0D0D; /* 호버 시 조금 어두워지는 효과 */
 }
 
 /* 셀렉트 박스도 input과 동일한 스타일 적용 */
@@ -93,7 +93,7 @@
 }
 
 .styled-select:focus {
-    border-color: #6f49f3;
+    border-color: #262626;
 }
 
 /* 반응형 추가 */

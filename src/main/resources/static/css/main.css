@@ -14,7 +14,7 @@
     text-align: center;
     font-size: 22px;
     font-weight: bold;
-    color: #6f49f3; /* 포인트 색상 */
+    color: #262626; /* 포인트 색상 */
     position: relative; /* 로그아웃 버튼 위치 조정을 위해 설정 */
 }
 
@@ -26,7 +26,7 @@
     transform: translateY(-50%);
     background: none;
     border: none;
-    color: #6f49f3;
+    color: #262626;
     font-size: 14px;
     cursor: pointer;
 }
@@ -82,6 +82,6 @@
 
 /* 활성화된 메뉴 스타일 */
 .nav-item.active {
-    color: #6f49f3;
+    color: #0D0D0D;
     font-weight: bold;
 }

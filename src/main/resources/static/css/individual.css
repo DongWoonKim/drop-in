@@ -28,7 +28,7 @@
 .record-save-btn {
     width: 100%;
     padding: 12px;
-    background-color: #4CAF50;
+    background-color: #262626;
     color: white;
     font-size: 16px;
     font-weight: bold;
@@ -39,7 +39,7 @@
 }
 
 .record-save-btn:hover {
-    background-color: #45a049;
+    background-color: #0D0D0D;
 }
 
 /* 🛡️ 비활성화(disabled) 상태 */
