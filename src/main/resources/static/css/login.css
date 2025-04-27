@@ -1,9 +1,8 @@
+/* 로그인 페이지에만 적용되는 스타일 */
 html, body {
     height: 100%;
-    overflow-x: hidden; /* 좌우 스크롤도 방지 */
-}
-
-body {
+    overflow-x: hidden; /* 좌우 스크롤 방지 */
+    overflow-y: hidden; /* 상하 스크롤 방지 */
     background-color: #ffffff;
     -webkit-overflow-scrolling: touch; /* iOS 부드러운 스크롤 */
 }
@@ -16,8 +15,8 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    min-height: calc(100vh - 1px); /* 100vh 문제를 회피 */
-    padding: 0 10px; /* 약간 여백 주기 */
+    min-height: 100vh;
+    padding: 0 10px;
 }
 /* 상단 제목 */
 .title {
