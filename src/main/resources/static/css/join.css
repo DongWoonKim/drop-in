@@ -96,6 +96,21 @@
     border-color: #262626;
 }
 
+/* 뒤로가기 버튼 */
+.btn-back {
+    display: inline-block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #666;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.btn-back:hover {
+    color: #262626;
+}
+
 /* 반응형 추가 */
 @media (max-width: 480px) {
     .title {

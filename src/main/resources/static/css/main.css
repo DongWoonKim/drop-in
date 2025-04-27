@@ -31,6 +31,10 @@
     cursor: pointer;
 }
 
+input[type="date"] {
+    color: #262626;
+}
+
 /* 메인 컨텐츠 */
 .content {
     padding: 12px 0;
