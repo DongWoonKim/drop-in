@@ -39,7 +39,6 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
         String requestURI = request.getRequestURI();
         log.info("request: {}", requestURI);
-
         // 예외 경로인 경우 토큰 검사 생략
         if (isExcluded(requestURI) && request.getMethod().matches("GET|POST")) {
             chain.doFilter(request, response);
