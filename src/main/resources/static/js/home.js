@@ -33,7 +33,7 @@ $(document).ready(() => {
           </div>
           <div class="comment-input-area">
             <textarea class="comment-input" placeholder="댓글을 입력하세요..."></textarea>
-            <button class="add-comment-btn">등록</button>
+            <button id="add-comment-btn" class="add-comment-btn">등록</button>
           </div>
         </div>
       </div>

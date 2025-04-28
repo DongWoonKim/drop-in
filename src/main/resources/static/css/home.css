@@ -68,17 +68,25 @@
 
 #add-comment-btn {
     width: 100%;
-    padding: 8px;
-    background-color: #0095f6;
-    color: white;
+    padding: 10px 0; /* 살짝 줄여서 높이 조정 */
+    background-color: #262626; /* 톤 통일 */
+    color: #fff;
+    font-weight: bold;
+    font-size: 15px; /* 글자도 살짝 줄임 */
     border: none;
-    border-radius: 5px;
+    border-radius: 8px; /* 기존 카드 스타일에 맞춰 자연스러운 라운드 */
     cursor: pointer;
-    font-size: 14px;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 #add-comment-btn:hover {
-    background-color: #007acc;
+    background-color: #0D0D0D;
+}
+
+#add-comment-btn:active {
+    background-color: #0D0D0D;
+    transform: translateY(1px);
 }
 
 @media (max-width: 480px) {
