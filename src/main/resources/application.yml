@@ -1,5 +1,7 @@
 server:
   port: 9000
+  undertow:
+    max-http-post-size: 20MB
 
 spring:
   application:
