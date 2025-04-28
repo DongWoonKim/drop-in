@@ -5,8 +5,8 @@ spring:
   application:
     name: drop-in
   datasource:
-    url: jdbc:mysql://10.0.2.15:3306/crossfit?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&characterEncoding=UTF-8
-#    url: jdbc:mysql://localhost:3307/crossfit?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&characterEncoding=UTF-8
+#    url: jdbc:mysql://10.0.2.15:3306/crossfit?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&characterEncoding=UTF-8
+    url: jdbc:mysql://localhost:3307/crossfit?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&characterEncoding=UTF-8
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 1234
