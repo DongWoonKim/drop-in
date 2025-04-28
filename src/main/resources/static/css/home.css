@@ -29,22 +29,18 @@
 
 .post-image {
     width: 100%;
-    min-height: 200px;
-    max-height: 200px;
     background-color: #f9f9f9;
+    min-height: 200px; /* 추가 */
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden; /* 넘치는거는 절대 안보이게 */
-    position: relative;
+    color: #aaa;
+    font-size: 14px;
 }
 
 .post-image img {
-    max-width: 100%; /* 가로가 박스보다 크면 자동 줄이기 */
-    max-height: 100%; /* 세로가 박스보다 크면 자동 줄이기 */
+    width: 100%;
     height: auto;
-    width: auto;
-    object-fit: contain; /* ⭐ 비율 유지하면서 박스 안에 맞추기 */
 }
 
 .comment-input-area {
