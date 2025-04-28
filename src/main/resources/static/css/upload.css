@@ -51,7 +51,7 @@ textarea {
 button[type="submit"] {
     width: 100%;
     padding: 12px;
-    background-color: #0095f6;
+    background-color: #262626;
     border: none;
     border-radius: 6px;
     color: white;
@@ -62,7 +62,7 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-    background-color: #007acc;
+    background-color: #0D0D0D;
 }
 
 /* 기존 upload-container 스타일은 그대로 두고 추가 */
