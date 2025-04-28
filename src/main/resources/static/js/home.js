@@ -27,18 +27,26 @@ async function h_initialize() {
         await handleTokenExpiration();
         await loadPosts(); // 최초 3개 로드
 
-        $(window).scroll(async function() {
+        $('#content').scroll(debounce(async function() {
             if (loading || noMorePosts) return;
 
-            if ($(window).scrollTop() + $(window).height() >= $(document).height() - 50) {
+            if ($('#content').scrollTop() + $('#content').height() >= $('#content')[0].scrollHeight - 150) {
                 loading = true;
                 $('#loading-spinner').show();
                 await loadPosts();
                 $('#loading-spinner').hide();
                 loading = false;
             }
-        });
+        }, 200)); // 200ms 기다렸다가 처리
     }
+}
+
+function debounce(func, delay) {
+    let timeout;
+    return function(...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), delay);
+    };
 }
 
 async function loadPosts() {
