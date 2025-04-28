@@ -6,6 +6,10 @@
     font-family: 'Montserrat', sans-serif;
 }
 
+body {
+    overflow: hidden;
+}
+
 .wod-card {
     background-color: #ffffff;
     border-radius: 12px;
