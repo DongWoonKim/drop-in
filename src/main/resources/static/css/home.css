@@ -18,17 +18,19 @@
 .post-image {
     width: 100%;
     background-color: #f9f9f9;
-    min-height: 200px; /* 추가 */
+    min-height: 200px; /* ✅ 고정 높이 */
+    max-height: 200px; /* ✅ 높이 고정 */
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #aaa;
-    font-size: 14px;
+    overflow: hidden; /* ✅ 넘치는 부분 잘라버림 */
+    position: relative;
 }
 
 .post-image img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover; /* ✅ 비율 유지하면서 가득 채우기 */
 }
 
 .post-content {
