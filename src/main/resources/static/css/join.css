@@ -1,12 +1,12 @@
 /* 메인 컨테이너 */
 .container {
-    width: 90%;
-    max-width: 400px; /* 모바일~태블릿까지 대응, 데스크톱에서도 중앙에 적당한 크기로 */
+    width: 100%;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    min-height: 100vh;
+    height: 100%;
+    overflow: auto;
+    padding: 20px;
 }
 
 /* 상단 제목 */
