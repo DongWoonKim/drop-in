@@ -7,35 +7,28 @@ $(document).ready(() => {
 
 async function h_initialize() {
     const homePage = $('body').data('page');
-
     if (homePage === 'home') {
         setupAjax();
         await handleTokenExpiration();
-        const wod = await getWodWithRetry(getToday(), box);
-        $('#home-wod-title').text(wod.title);
 
-        let clean = '';
-        if (wod.program && wod.program.trim().length > 0) {
-            clean = DOMPurify.sanitize(wod.program);
-        } else {
-            clean = '<p style="text-align:center; color:gray;">오늘의 WOD가 아직 등록되지 않았습니다.</p>';
-        }
-        $('#home-wod-program').html(clean);
 
-    }
-}
+        $('#toggle-comments-btn').click(function() {
+            $('#home-wod-comments').slideToggle(200);
 
-async function getWodWithRetry(date, box) {
-    try {
-        return await getWod(date, box);
-    } catch (xhr) {
-        if (xhr.status === 401) {
-            console.warn('🔁 Access Token 만료 → 재발급 시도 중...');
-            await handleTokenExpiration(); // 재발급 먼저
-            return await getWod(date, box); // 재요청
-        } else {
-            throw xhr;
-        }
+            // 버튼 텍스트 토글
+            if ($(this).text() === '댓글 보기') {
+                $(this).text('댓글 숨기기');
+            } else {
+                $(this).text('댓글 보기');
+            }
+        });
+
+        // 예시로 사진 넣는 코드 (Thymeleaf에서 직접 채워도 됨)
+        $('#home-wod-photo').attr('src', '/images/sample-photo.jpg');
+
+        // 예시 작성자/날짜 데이터 (Thymeleaf에서 직접 채워도 됨)
+        $('#home-wod-writer').text('홍길동');
+        $('#home-wod-date').text('2025-04-28');
     }
 }
 

@@ -39,4 +39,9 @@ public class ContentRouter {
         return "main";
     }
 
+    @GetMapping("/upload")
+    public String uploadPage(Model model) {
+        model.addAttribute("page", "upload");
+        return "main"; // 공통 메인 페이지
+    }
 }

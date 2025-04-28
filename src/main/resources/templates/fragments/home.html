@@ -2,12 +2,45 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <div th:fragment="content">
 
-  <!-- HTML -->
-  <h2 id="home-wod-title"></h2>
-  <hr>
-  <br>
-  <div class="wod-card">
-    <div id="home-wod-program" style="padding: 10px;"></div>
+  <div class="post-card">
+
+    <!-- 작성자와 날짜 -->
+    <div class="post-header">
+      <span id="home-wod-writer">작성자</span> ·
+      <span id="home-wod-date">날짜</span>
+    </div>
+
+    <hr>
+
+    <!-- 사진 영역 -->
+    <div class="post-image" id="home-wod-image">
+      <img src="" alt="사진" id="home-wod-photo" />
+    </div>
+
+    <!-- 글 영역 -->
+    <div class="post-content" id="home-wod-program">
+      프로그램 내용이 들어갑니다.
+    </div>
+
+    <!-- 댓글 보기 버튼 -->
+    <div class="post-comment-toggle">
+      <button id="toggle-comments-btn">댓글 보기</button>
+    </div>
+
+    <!-- 댓글 영역 (기본 숨김) -->
+    <div class="post-comments" id="home-wod-comments">
+      <div id="comment-list">
+        <p>댓글1: 예시 댓글입니다.</p>
+        <p>댓글2: 또 다른 댓글입니다.</p>
+      </div>
+
+      <!-- 댓글 입력창 -->
+      <div class="comment-input-area">
+        <textarea id="comment-input" placeholder="댓글을 입력하세요..."></textarea>
+        <button id="add-comment-btn">등록</button>
+      </div>
+    </div>
+
   </div>
 
 </div>

@@ -29,6 +29,43 @@
     padding-bottom: 72px; /* <-- 중요: bottom-nav 높이 + 여유 공간 */
 }
 
+.plus-button {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: #262626;
+    text-decoration: none;
+    overflow: hidden; /* ripple이 넘치지 않게 */
+}
+
+.plus-button:hover {
+    color: #0D0D0D;
+    transform: translateY(-50%) scale(1.1);
+    transition: all 0.2s;
+}
+
+.plus-button::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    transition: width 0.4s ease-out, height 0.4s ease-out, opacity 0.8s ease-out;
+}
+
+.plus-button:active::after {
+    width: 120px;
+    height: 120px;
+    opacity: 0.4;
+}
+
 /* 로그아웃 버튼 */
 .logout-btn {
     position: absolute;
