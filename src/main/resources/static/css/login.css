@@ -18,6 +18,7 @@ html, body {
     min-height: 100vh;
     padding: 0 10px;
 }
+
 /* 상단 제목 */
 .title {
     text-align: center;
@@ -26,16 +27,19 @@ html, body {
     color: #262626;
     margin-bottom: 30px;
 }
+
 /* 라인 스타일의 폼 그룹 */
 .form-group {
     margin-bottom: 20px;
 }
+
 .form-group label {
     display: block;
     font-size: 14px;
     color: #666;
     margin-bottom: 5px;
 }
+
 .form-group input {
     width: 100%;
     font-size: 16px;
@@ -44,9 +48,11 @@ html, body {
     padding: 8px 0;
     outline: none;
 }
+
 .form-group input:focus {
     border-color: #262626;
 }
+
 /* 로그인 버튼 */
 .btn-submit {
     margin-bottom: 10px;
@@ -61,9 +67,17 @@ html, body {
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
+
 .btn-submit:hover {
     background-color: #0D0D0D;
 }
+
+.beta {
+    font-size: 0.6em; /* Strong 대비 크기 줄이기 */
+    margin-left: 4px; /* 약간 띄워주기 */
+    vertical-align: super; /* 살짝 위로 올리고 싶으면 */
+}
+
 @media (max-width: 480px) {
     .title {
         font-size: 20px;
