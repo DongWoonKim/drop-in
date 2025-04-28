@@ -109,3 +109,21 @@ let getWod = (date, box) => {
     });
 
 }
+
+function detectKeyboard() {
+    const bottomNav = document.querySelector('.bottom-nav');
+
+    window.addEventListener('resize', () => {
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.clientHeight;
+
+        // 키보드 올라오면 화면 높이가 줄어들어서 차이가 생김
+        if (windowHeight < documentHeight * 0.8) {
+            // 키보드 올라왔다고 판단
+            bottomNav.style.display = 'none';
+        } else {
+            // 키보드 내려갔다
+            bottomNav.style.display = 'flex';
+        }
+    });
+}

@@ -2,6 +2,7 @@ let contented = false;
 let wodExists = false;
 
 $(document).ready(() => {
+    detectKeyboard();
     i_initialize().catch(console.error);
 });
 
