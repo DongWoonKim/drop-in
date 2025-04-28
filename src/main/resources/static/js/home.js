@@ -30,7 +30,10 @@ async function h_initialize() {
         $('#content').scroll(debounce(async function() {
             if (loading || noMorePosts) return;
 
-            if ($('#content').scrollTop() + $('#content').height() >= $('#content')[0].scrollHeight - 150) {
+            const content = $('#content')[0];
+            const scrollPercent = (content.scrollTop + content.clientHeight) / content.scrollHeight;
+
+            if (scrollPercent >= 0.9) {
                 loading = true;
                 $('#loading-spinner').show();
                 await loadPosts();
