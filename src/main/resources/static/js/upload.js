@@ -124,7 +124,7 @@ function handleFormSubmit(e) {
 // -------------------- 파일 유효성 검사 + 미리보기 --------------------
 function validateAndPreview(file) {
     const validExtensions = ['jpg', 'jpeg', 'png', 'gif'];
-    const maxSize = 5 * 1024 * 1024; // 5MB
+    const maxSize = 20 * 1024 * 1024; // 5MB
 
     const fileName = file.name;
     const fileExtension = fileName.split('.').pop().toLowerCase();
