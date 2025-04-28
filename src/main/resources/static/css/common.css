@@ -11,6 +11,10 @@ html, body {
     overflow: hidden;
 }
 
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
 .wod-card {
     background-color: #ffffff;
     border-radius: 12px;
