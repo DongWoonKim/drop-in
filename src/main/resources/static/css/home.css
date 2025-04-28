@@ -72,7 +72,7 @@
     margin-bottom: 5px;
 }
 
-#add-comment-btn {
+.add-comment-btn {
     width: 100%;
     padding: 10px 0; /* 살짝 줄여서 높이 조정 */
     background-color: #262626; /* 톤 통일 */
@@ -86,11 +86,11 @@
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-#add-comment-btn:hover {
+.add-comment-btn:hover {
     background-color: #0D0D0D;
 }
 
-#add-comment-btn:active {
+.add-comment-btn:active {
     background-color: #0D0D0D;
     transform: translateY(1px);
 }
