@@ -17,20 +17,21 @@
 
 .post-image {
     width: 100%;
+    min-height: 200px;
+    max-height: 200px;
     background-color: #f9f9f9;
-    min-height: 200px; /* ✅ 고정 높이 */
-    max-height: 200px; /* ✅ 높이 고정 */
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden; /* ✅ 넘치는 부분 잘라버림 */
+    overflow: hidden;
     position: relative;
 }
 
 .post-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* ✅ 비율 유지하면서 가득 채우기 */
+    max-height: 100%; /* 높이는 100% 채우기 */
+    height: auto;
+    width: auto; /* 너비는 이미지 원래 비율에 따라 유동적 */
+    object-fit: contain; /* ⭐⭐ 잘리지 않게 맞춰줌 */
 }
 
 .post-content {
