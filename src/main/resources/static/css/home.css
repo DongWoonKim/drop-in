@@ -18,6 +18,12 @@
 .post-image {
     width: 100%;
     background-color: #f9f9f9;
+    min-height: 200px; /* 추가 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #aaa;
+    font-size: 14px;
 }
 
 .post-image img {
