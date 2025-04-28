@@ -1,50 +1,22 @@
 let box = 'hound_garak';
+let lastCreatedAt = null; // ⭐ 마지막 가져온 createdAt
+let lastId = null;        // ⭐ 마지막 가져온 id
+let loading = false;
+let noMorePosts = false;
 
 $(document).ready(() => {
     h_initialize()
         .catch(console.error);
 
-    for (let i = 0; i < 3; i++) {
-        const postCard = `
-      <div class="post-card">
-        <div class="post-header">
-          <span id="home-wod-writer">작성자${i+1}</span> ·
-          <span id="home-wod-date">2025-04-28</span>
-        </div>
-
-        <hr>
-
-        <div class="post-image" id="home-wod-image">
-          <img src="" alt="사진" id="home-wod-photo" />
-        </div>
-
-        <div class="post-content" id="home-wod-program">
-          오늘 재밌었다. (${i+1})
-        </div>
-
-        <div class="post-comment-toggle">
-          <button class="toggle-comments-btn">댓글 보기</button>
-        </div>
-
-        <div class="post-comments" style="display:none;">
-          <div class="comment-list">
-            <p>댓글1: 예시 댓글입니다.</p>
-            <p>댓글2: 또 다른 댓글입니다.</p>
-          </div>
-          <div class="comment-input-area">
-            <textarea class="comment-input" placeholder="댓글을 입력하세요..."></textarea>
-            <button id="add-comment-btn" class="add-comment-btn">등록</button>
-          </div>
-        </div>
-      </div>
-    `;
-
-        $("#post-list").append(postCard);
-    }
-
-    // 댓글 보기 버튼 클릭 이벤트도 같이 걸어줄게
     $(document).on('click', '.toggle-comments-btn', function() {
-        $(this).closest('.post-card').find('.post-comments').toggle();
+        $(this).closest('.post-card').find('.post-comments').slideToggle(200);
+
+        // 버튼 텍스트 토글
+        if ($(this).text() === '댓글 보기') {
+            $(this).text('댓글 숨기기');
+        } else {
+            $(this).text('댓글 보기');
+        }
     });
 });
 
@@ -53,25 +25,75 @@ async function h_initialize() {
     if (homePage === 'home') {
         setupAjax();
         await handleTokenExpiration();
+        await loadPosts(); // 최초 3개 로드
 
+        $(window).scroll(async function() {
+            if (loading || noMorePosts) return;
 
-        $('#toggle-comments-btn').click(function() {
-            $('#home-wod-comments').slideToggle(200);
-
-            // 버튼 텍스트 토글
-            if ($(this).text() === '댓글 보기') {
-                $(this).text('댓글 숨기기');
-            } else {
-                $(this).text('댓글 보기');
+            if ($(window).scrollTop() + $(window).height() >= $(document).height() - 50) {
+                loading = true;
+                $('#loading-spinner').show();
+                await loadPosts();
+                $('#loading-spinner').hide();
+                loading = false;
             }
         });
-
-        // 예시로 사진 넣는 코드 (Thymeleaf에서 직접 채워도 됨)
-        $('#home-wod-photo').attr('src', '/images/sample-photo.jpg');
-
-        // 예시 작성자/날짜 데이터 (Thymeleaf에서 직접 채워도 됨)
-        $('#home-wod-writer').text('홍길동');
-        $('#home-wod-date').text('2025-04-28');
     }
 }
 
+async function loadPosts() {
+    try {
+        const size = 3;
+        let url = `/communities/sns?box=1&size=${size}`;
+
+        if (lastCreatedAt !== null && lastId !== null) {
+            url += `&lastCreatedAt=${lastCreatedAt}&lastId=${lastId}`;
+        }
+
+        const response = await $.get(url);
+
+        if (response.length === 0) {
+            noMorePosts = true;
+            return;
+        }
+
+        response.forEach(post => {
+            const postCard = `
+                <div class="post-card">
+                    <div class="post-header">
+                        <span class="home-wod-writer">${post.userName}</span> ·
+                        <span class="home-wod-date">${post.createdAt.substring(0, 10)}</span>
+                    </div>
+                    <hr>
+                    <div class="post-image">
+                        <img src="https://daily-pr.s3.ap-northeast-2.amazonaws.com/${post.imageUrl}" alt="사진" class="home-wod-photo" />
+                    </div>
+                    <div class="post-content">
+                        ${post.content}
+                    </div>
+                    <div class="post-comment-toggle">
+                        <button class="toggle-comments-btn">댓글 보기</button>
+                    </div>
+                    <div class="post-comments" style="display:none;">
+                        <div class="comment-list">
+                            <p>댓글1: 예시 댓글입니다.</p>
+                            <p>댓글2: 또 다른 댓글입니다.</p>
+                        </div>
+                        <div class="comment-input-area">
+                            <textarea class="comment-input" placeholder="댓글을 입력하세요..."></textarea>
+                            <button class="add-comment-btn">등록</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            $('#post-list').append(postCard);
+
+            // ⭐ 가져온 마지막 글의 createdAt, id로 다음 요청 준비
+            lastCreatedAt = post.createdAt;
+            lastId = post.id;
+        });
+    } catch (error) {
+        console.error('게시글 불러오기 실패:', error);
+    }
+}

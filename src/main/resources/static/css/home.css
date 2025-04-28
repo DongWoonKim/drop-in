@@ -95,8 +95,29 @@
     transform: translateY(1px);
 }
 
+/* 간단한 로딩 스피너 스타일 */
+#loading-spinner {
+    display: none;
+    text-align: center;
+    margin: 20px 0;
+}
+.spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin: auto;
+}
+
 @media (max-width: 480px) {
     .post-card {
         width: 95%; /* 화면 더 작을 때는 95%까지 */
     }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

@@ -111,6 +111,7 @@ function handleFormSubmit(e) {
         success: function(response) {
             $('#loading').hide();
             showToast('내용이 게시되었습니다.');
+            window.location.href = '/'
         },
         error: function(xhr, status, error) {
             console.error(error);
