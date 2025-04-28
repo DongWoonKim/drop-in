@@ -36,7 +36,7 @@ public class MemberService {
         return ((CustomUserDetails) authenticate.getPrincipal()).getMember();
     }
 
-    public Member getUserStatus(String userId) {
+    public Member getUser(String userId) {
         return memberRepository.findByUserId(userId);
     }
 

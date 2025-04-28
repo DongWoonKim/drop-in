@@ -8,5 +8,6 @@ import lombok.Getter;
 public class MemberInfoResponseDTO {
     private String userId;
     private String userName;
+    private Long boxId;
 }
 

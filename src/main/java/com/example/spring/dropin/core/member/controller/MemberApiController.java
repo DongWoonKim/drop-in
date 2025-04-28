@@ -69,10 +69,20 @@ public class MemberApiController {
                 .build();
     }
 
+    @GetMapping("/{userId}")
+    public MemberInfoResponseDTO getMemberInfo(@PathVariable("userId") String userId) {
+        Member user = memberService.getUser(userId);
+        return MemberInfoResponseDTO.builder()
+                .userId(userId)
+                .userName(user.getUserName())
+                .boxId(Long.parseLong(user.getBox()))
+                .build();
+    }
+
     @GetMapping("/{userId}/status")
     public UserStatusResponseDTO getMemberStatus(@PathVariable("userId") String userId) {
         return UserStatusResponseDTO.builder()
-                .status( memberService.getUserStatus(userId).getStatus() )
+                .status( memberService.getUser(userId).getStatus() )
                 .build();
     }
 }

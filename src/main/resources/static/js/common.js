@@ -82,6 +82,21 @@ let userInfo = () => {
     });
 }
 
+let userInfoByUserId = (userId) => {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            type: 'GET',
+            url: '/members/' + userId,
+            success: (response) => {
+                resolve(response); // 성공 시 Promise를 해결
+            },
+            error: (xhr) => {
+                reject(xhr); // 오류가 발생한 경우 Promise를 거부
+            }
+        });
+    });
+}
+
 let getToday = () => {
     // 1) 오늘 날짜 계산 (yyyy‑mm‑dd)
     const now   = new Date();
@@ -126,4 +141,13 @@ function detectKeyboard() {
             bottomNav.style.display = 'flex';
         }
     });
+}
+
+function showToast(message) {
+    const toast = $('#toast');
+    toast.text(message);
+    toast.fadeIn(300);
+    setTimeout(() => {
+        toast.fadeOut(300);
+    }, 2000);
 }

@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <div th:fragment="content">
+  <input type="hidden" id="u_hUserId">
+  <input type="hidden" id="u_hUserName">
+  <input type="hidden" id="u_hBoxId">
 
   <div class="upload-container">
 
@@ -26,8 +29,8 @@
 
       <!-- 프로그램 내용 입력 -->
       <div class="form-group">
-        <label for="content">내용</label>
-        <textarea id="content" name="content" placeholder="사진의 내용에 대해서 이야기해주세요." required></textarea>
+        <label for="upload-content">내용</label>
+        <textarea id="upload-content" name="content" placeholder="사진의 내용에 대해서 이야기해주세요." required></textarea>
       </div>
 
       <!-- 등록 버튼 -->
@@ -36,7 +39,7 @@
       </div>
 
     </form>
-
+    <div id="toast" class="toast"></div>
   </div>
 
 </div>

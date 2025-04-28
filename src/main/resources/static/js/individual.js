@@ -196,12 +196,3 @@ let datePicker = (elementId) => {
         })();
     });
 }
-
-function showToast(message) {
-    const toast = $('#toast');
-    toast.text(message);
-    toast.fadeIn(300);
-    setTimeout(() => {
-        toast.fadeOut(300);
-    }, 2000);
-}

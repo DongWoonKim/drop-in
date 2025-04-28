@@ -46,6 +46,7 @@ public class SecurityConfig {
                                     new AntPathRequestMatcher("/members/new", "GET"),
                                     new AntPathRequestMatcher("/members/login", "GET"),
                                     new AntPathRequestMatcher("/members/*/pending", "GET"),
+                                    new AntPathRequestMatcher("/members/{userId}", "GET"),
                                     new AntPathRequestMatcher("/home", "GET"),
                                     new AntPathRequestMatcher("/individual", "GET"),
                                     new AntPathRequestMatcher("/group", "GET"),
@@ -60,7 +61,8 @@ public class SecurityConfig {
                                     new AntPathRequestMatcher("/members/login", "POST"),
                                     new AntPathRequestMatcher("/members/logout", "POST"),
                                     new AntPathRequestMatcher("/records/me", "POST"),
-                                    new AntPathRequestMatcher("/refresh-token", "POST")
+                                    new AntPathRequestMatcher("/refresh-token", "POST"),
+                                    new AntPathRequestMatcher("/communities/posts", "POST")
                                 )
                                 .permitAll()
                                 .anyRequest().authenticated())
