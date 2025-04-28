@@ -1,5 +1,6 @@
 .post-card {
-    width: 400px;
+    width: 90%;            /* 전체 폭을 90%로 */
+    max-width: 400px;       /* 최대 400px까지만 */
     margin: 20px auto;
     border: 1px solid #ddd;
     border-radius: 10px;
@@ -78,4 +79,10 @@
 
 #add-comment-btn:hover {
     background-color: #007acc;
+}
+
+@media (max-width: 480px) {
+    .post-card {
+        width: 95%; /* 화면 더 작을 때는 95%까지 */
+    }
 }
