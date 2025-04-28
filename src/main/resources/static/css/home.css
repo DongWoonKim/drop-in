@@ -15,21 +15,7 @@
     font-size: 16px;
 }
 
-.post-image {
-    width: 100%;
-    min-height: 200px;
-    max-height: 200px;
-    background-color: #f9f9f9;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
-.post-image img {
-    height: 100%; /* ⭐ 무조건 높이 200px 꽉 채움 */
-    width: auto;  /* ⭐ 너비는 비율대로 자동 */
-    object-fit: none; /* ⭐ 강제로 fit 시키지 않음 */
-}
 
 .post-content {
     padding: 15px;
@@ -41,20 +27,24 @@
     padding: 0 15px 15px 15px;
 }
 
-.post-comment-toggle button {
-    background-color: transparent;
-    border: none;
-    color: #0095f6;
-    cursor: pointer;
-    font-size: 14px;
+.post-image {
+    width: 100%;
+    min-height: 200px;
+    max-height: 200px;
+    background-color: #f9f9f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* 넘치는거는 절대 안보이게 */
+    position: relative;
 }
 
-.post-comments {
-    padding: 15px;
-    border-top: 1px solid #eee;
-    display: none; /* 처음엔 숨김 */
-    font-size: 13px;
-    color: #555;
+.post-image img {
+    max-width: 100%; /* 가로가 박스보다 크면 자동 줄이기 */
+    max-height: 100%; /* 세로가 박스보다 크면 자동 줄이기 */
+    height: auto;
+    width: auto;
+    object-fit: contain; /* ⭐ 비율 유지하면서 박스 안에 맞추기 */
 }
 
 .comment-input-area {
