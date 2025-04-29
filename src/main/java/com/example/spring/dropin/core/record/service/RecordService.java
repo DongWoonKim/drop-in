@@ -35,6 +35,29 @@ public class RecordService {
         ) > 0;
     }
 
+    public RecordSaveResponseDTO saveOrUpdateRecord(RecordSaveRequestDTO requestDTO) {
+        Optional<Record> existingRecord = recordRepository
+                .findByUserIdAndDateAndBox(requestDTO.getUserId(), LocalDate.parse(requestDTO.getDate()), requestDTO.getBox());
+
+        if (existingRecord.isPresent()) {
+            recordRepository.updateContentByIdAndUserId(
+                    existingRecord.get().getId(),
+                    requestDTO.getUserId(),
+                    requestDTO.getContent()
+            );
+
+            return RecordSaveResponseDTO.builder()
+                    .recordId(existingRecord.get().getId())
+                    .build();
+        }
+
+        // 새로 저장
+        Record saved = recordRepository.save(requestDTO.toRecord());
+        return RecordSaveResponseDTO.builder()
+                .recordId(saved.getId())
+                .build();
+    }
+
     public Optional<RecordFindResponseDTO> getRecord(RecordFindReqeustDTO recordFindReqeustDTO) {
         LocalDate date = LocalDate.parse(recordFindReqeustDTO.getDate());
         return recordRepository.findByUserIdAndDateAndBox(recordFindReqeustDTO.getUserId(), date, recordFindReqeustDTO.getBox())

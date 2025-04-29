@@ -74,13 +74,19 @@ let getRecord = () => {
             } else {
                 contented = true;
                 $('#hRecordId').val(response.id);
-                $('#record-text').val(response.content);
+                $('#record-text').val(decodeHtmlEntities(response.content));
                 $('#record-save-btn').text('수정하기');
             }
 
             checkContentAndToggleButton();
         }
     });
+}
+
+function decodeHtmlEntities(str) {
+    const txt = document.createElement('textarea');
+    txt.innerHTML = str;
+    return txt.value;
 }
 
 async function reqWodWithRetry(date, box) {
@@ -146,8 +152,11 @@ let newSave = () => {
         dataType: 'json',
         success: (response) => {
             showToast('기록이 저장되었습니다.');
-            if (response)
-                $('#hRecordId').val(response.recordId);
+
+            // 1.5초(1500ms) 후에 새로고침
+            setTimeout(() => {
+                location.reload();
+            }, 1500);
         },
         error: (xhr) => {
             console.error('저장 실패:', xhr);
@@ -174,7 +183,6 @@ let update = () => {
         dataType: 'json',
         success: (response) => {
             if (response && response.success) {
-                // alert('기록이 수정되었습니다.')
                 showToast('기록이 수정되었습니다.');
             }
         },

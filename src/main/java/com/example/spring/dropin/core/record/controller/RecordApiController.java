@@ -36,7 +36,7 @@ public class RecordApiController {
         // safeContent를 세팅해서 저장하도록 DTO 수정
         recordSaveRequestDTO.setContent(safeContent);
 
-        return recordService.recordSave(recordSaveRequestDTO);
+        return recordService.saveOrUpdateRecord(recordSaveRequestDTO);
     }
 
     @PutMapping("/me")
