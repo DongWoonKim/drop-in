@@ -130,3 +130,16 @@ tasks.named('jacocoTestCoverageVerification', JacocoCoverageVerification) {
 tasks.named('check') {
     dependsOn tasks.named('jacocoTestCoverageVerification')
 }
+
+def profile = project.hasProperty("profile") ? project.property("profile").toString() : "local"
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ["src/main/java"]
+        }
+        resources {
+            srcDirs = ["src/main/resources", "src/main/resources-${profile}"]
+        }
+    }
+}
